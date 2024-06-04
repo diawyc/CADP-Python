@@ -9,5 +9,9 @@ pip install --user pymysql
 ```
 ## 安装mysql
 ```
+sudo yum install mysql -y
+```
+## 连接RDS mysql
+```
 mysql -h mydbinstance.cxtmwuenuqe2.rds.cn-northwest-1.amazonaws.com.cn -P 3306 -u root -p
 ```
