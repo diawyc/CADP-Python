@@ -2,14 +2,14 @@
 <html>
 <head>
   <meta charset="utf-8"> <!-- 设置字符编码为 UTF-8 -->
-  <title>登录页面</title> <!-- 设置页面标题 -->
+  <title>注册</title> <!-- 设置页面标题 -->
   <script src="{{url_for('static', filename='lib/jquery-3.7.1.min.js')}}"></script> <!-- 引入 jQuery 库 -->
   <script src="{{url_for('static', filename='lib/layui/layui.all.js')}}"></script> <!-- 引入 Layui 库 -->
   <link rel="stylesheet" href="{{url_for('static', filename='lib/layui/css/layui.css')}}"> <!-- 引入 Layui 样式表 -->
 </head>
 <body>
   <div class="" style="height: 260px; width: 400px; text-align: center; margin: 20% auto;"> <!-- 设置登录框的样式 -->
-    <div class="layui-col-md12">用户登录</div> <!-- 登录框标题 -->
+    <div class="layui-col-md12">用户注册</div> <!-- 登录框标题 -->
     <div class="layui-col-md12"><input type="text" placeholder="用户名" id="reg_name" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div> <!-- 用户名输入框 -->
     <div class="layui-col-md12"><input type="text" placeholder="邮箱" id="reg_mail" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div> <!-- 邮箱输入框 -->
     <div class="layui-col-md12"><input type="password" placeholder="密码" id="reg_pwd" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div> <!-- 密码输入框 -->
@@ -23,7 +23,7 @@
 
 <script>
   $(function () { // 页面加载完成后执行函数
-    $('reg').click(function () { // 点击注册按钮时执行函数
+    $('#reg').click(function () { // 点击注册按钮时执行函数
       // 注册流程
       var name = $('#reg_name').val(); // 获取用户名
       var mail = $('#reg_mail').val(); // 获取邮箱
