@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>管理首页</title>
-    <script sr="{{ url_for('static', filename='lib/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/layui/layui.all.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='lib/layui/css/layui.css') }}">
 </head>
@@ -23,7 +23,6 @@
             <table id="userlist" lay-filter="userList"></table>
         </div>
     </div>
-
 <script>
     $(function() {
         var table = layui.table;
@@ -44,11 +43,11 @@
                 ]]
             });
         }
-        getUserList("");// 与原书不同
+        getUserList('');//
         // 查询
-        $('#cz_btn').click(function () {
-            var cz_user = $('#cz_user').val()
-            getUserList(cz_user)
+        $('#cx_btn').click(function () {
+            var cx_user = $('#cx_user').val()
+            getUserList(cx_user)
         });
         // 监听工具栏
         table.on('tool(userList)', function (obj) {
@@ -81,7 +80,7 @@
                     content: '<div class="layui-input-block" style="margin: 0;width: 400px; text-align: center;"><input class="layui-input" style="width: 300px; display: inline-block;" autocomplete="off"></div>',
                     yes: function () {
                         // 确认修改
-                        var pwd = $("input").val();
+                        var pwd = $("#pwd").val();
                         if (pwd.length > 0) {
                             $.ajax({
                                 url: '/aput/',
