@@ -65,5 +65,5 @@ sudo aws s3 cp s3://$s3_bucket_name/app . --recursive --region=$region
 ```
 ## 启动Web程序
 ```
-python3 /usr/bin/mytest/app.py
+python3 /usr/bin/mytest/app/app.py
 ```
