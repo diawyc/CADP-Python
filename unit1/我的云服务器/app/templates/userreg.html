@@ -43,10 +43,15 @@
       } else { // 否则
         $.post('/reg/', {'user': name, 'pwd': pwd, 'email': mail}, function (res) { // 发送 POST 请求
           if (res.code === 0) { // 如果返回码为 0
-            // 注册成功后的操作
-          }
+                layer.msg(res.msg);
+                setTimeout(function() {
+                    window.location.href = '/'
+                }, 2000);
+            } else {
+                layer.msg(res.msg)
+            }
         })
-      }
+        }
     })
-  })
+})
 </script>
