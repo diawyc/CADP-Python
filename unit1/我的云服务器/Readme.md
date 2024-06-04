@@ -3,7 +3,7 @@ p019
 ```
 sudo yum install python3 python3-pip
 pip3 install --upgrade pip
-sudo pip3 install flask
+pip3 install --user flask
 pip3 install --user pymysql
 
 ```
