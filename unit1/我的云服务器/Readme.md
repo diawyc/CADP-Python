@@ -7,3 +7,7 @@ sudo pip install flask
 pip install --user pymysql
 
 ```
+## 安装mysql
+```
+mysql -h mydbinstance.cxtmwuenuqe2.rds.cn-northwest-1.amazonaws.com.cn -P 3306 -u root -p
+```
