@@ -34,7 +34,7 @@ SHOW DATABASES;
       pwd VARCHAR(255),
       email VARCHAR(255),
       PRIMARY KEY(id)
-      )；
+      );
 
 SHOW TABLES;    
 
