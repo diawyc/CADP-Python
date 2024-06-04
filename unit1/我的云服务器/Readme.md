@@ -2,9 +2,9 @@
 p019
 ```
 sudo yum install python3 python3-pip
-pip install --upgrade pip
-sudo pip install flask
-pip install --user pymysql
+pip3 install --upgrade pip
+sudo pip3 install flask
+pip3 install --user pymysql
 
 ```
 ## 安装mysql
