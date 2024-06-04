@@ -1,57 +1,56 @@
-<!DOCTYPE html> <!-- 声明文档类型 -->
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8"> <!-- 设置字符编码为 UTF-8 -->
-  <title>注册</title> <!-- 设置页面标题 -->
-  <script src="{{url_for('static', filename='lib/jquery-3.7.1.min.js')}}"></script> <!-- 引入 jQuery 库 -->
-  <script src="{{url_for('static', filename='lib/layui/layui.all.js')}}"></script> <!-- 引入 Layui 库 -->
-  <link rel="stylesheet" href="{{url_for('static', filename='lib/layui/css/layui.css')}}"> <!-- 引入 Layui 样式表 -->
+  <meta charset="utf-8">
+  <title>注册</title>
+  <script src="{{url_for('static', filename='lib/jquery-3.7.1.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/layui/layui.all.js')}}"></script>
+  <link rel="stylesheet" href="{{url_for('static', filename='lib/layui/css/layui.css')}}">
 </head>
 <body>
-  <div class="" style="height: 260px; width: 400px; text-align: center; margin: 20% auto;"> <!-- 设置登录框的样式 -->
-    <div class="layui-col-md12">用户注册</div> <!-- 登录框标题 -->
-    <div class="layui-col-md12"><input type="text" placeholder="用户名" id="reg_name" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div> <!-- 用户名输入框 -->
-    <div class="layui-col-md12"><input type="text" placeholder="邮箱" id="reg_mail" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div> <!-- 邮箱输入框 -->
-    <div class="layui-col-md12"><input type="password" placeholder="密码" id="reg_pwd" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div> <!-- 密码输入框 -->
-    <div class="layui-col-md12"><input type="password" placeholder="确认密码" id="reg_pwd2" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div> <!-- 确认密码输入框 -->
-    <div class="layui-col-md12"> <!-- 登录按钮 -->
-      <button class="layui-btn">注册</button>
+  <div class="" style="height: 260px; width: 400px; text-align: center; margin: 20% auto;">
+    <div class="layui-col-md12">用户注册</div>
+    <div class="layui-col-md12"><input type="text" placeholder="用户名" id="reg_name" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>
+    <div class="layui-col-md12"><input type="text" placeholder="邮箱" id="reg_mail" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>
+    <div class="layui-col-md12"><input type="password" placeholder="密码" id="reg_pwd" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>
+    <div class="layui-col-md12"><input type="password" placeholder="确认密码" id="reg_pwd2" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>
+    <div class="layui-col-md12">
+      <button class="layui-btn" id="reg">注册</button>
     </div>
   </div>
+
+  <script>
+    $(function () {
+      $('#reg').click(function () {
+        var name = $('#reg_name').val();
+        var mail = $('#reg_mail').val();
+        var pwd = $('#reg_pwd').val();
+        var pwd2 = $('#reg_pwd2').val();
+        console.log(pwd);
+        var user_rz = /^[0-9a-zA-Z]{6,}$/;
+        var mail_rz = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/;
+        console.log(user_rz.test(name));
+        console.log(mail_rz.test(mail));
+        if (!user_rz.test(name)) {
+          return layer.msg('用户名最少6个字符且只能包含字母和数字, 且不能为空')
+        } else if (pwd.length === 0 || pwd !== pwd2) {
+          return layer.msg('请输入相同的密码')
+        } else if (!mail_rz.test(mail)) {
+          return layer.msg('请输入有效的邮箱')
+        } else {
+          $.post('/reg/', {'user': name, 'pwd': pwd, 'email': mail}, function (res) {
+            if (res.code === 0) {
+              layer.msg(res.msg);
+              setTimeout(function() {
+                window.location.href = '/'
+              }, 2000);
+            } else {
+              layer.msg(res.msg)
+            }
+          })
+        }
+      })
+    })
+  </script>
 </body>
 </html>
-
-<script>
-  $(function () { // 页面加载完成后执行函数
-    $('#reg').click(function () { // 点击注册按钮时执行函数
-      // 注册流程
-      var name = $('#reg_name').val(); // 获取用户名
-      var mail = $('#reg_mail').val(); // 获取邮箱
-      var pwd = $('#reg_pwd').val(); // 获取密码
-      var pwd2 = $('#reg_pwd2').val(); // 获取确认密码
-      console.log(pwd); // 打印密码
-      var user_rz = /^[0-9a-zA-Z]{6,}$/; // 用户名正则表达式
-      var mail_rz = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/; // 邮箱正则表达式
-      console.log(user_rz.test(name)); // 打印用户名是否匹配正则表达式
-      console.log(mail_rz.test(mail)); // 打印邮箱是否匹配正则表达式
-      if (!user_rz.test(name)) { // 如果用户名不匹配正则表达式
-        return layer.msg('用户名最少6个字符且只能包含字母和数字, 且不能为空') // 弹出提示框
-      } else if (pwd.length === 0 || pwd !== pwd2) { // 如果密码为空或两次输入不一致
-        return layer.msg('请输入相同的密码') // 弹出提示框
-      } else if (!mail_rz.test(mail)) { // 如果邮箱不匹配正则表达式
-        return layer.msg('请输入有效的邮箱') // 弹出提示框
-      } else { // 否则
-        $.post('/reg/', {'user': name, 'pwd': pwd, 'email': mail}, function (res) { // 发送 POST 请求
-          if (res.code === 0) { // 如果返回码为 0
-                layer.msg(res.msg);
-                setTimeout(function() {
-                    window.location.href = '/'
-                }, 2000);
-            } else {
-                layer.msg(res.msg)
-            }
-        })
-        }
-    })
-})
-</script>
