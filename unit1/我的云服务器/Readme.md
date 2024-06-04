@@ -48,7 +48,7 @@ select * from user;
 ## 将本地app目录上传至S3上
 ```
 local_folder_name=app
-s3_bucket_name=
+s3_bucket_name=lessonbucket
 ```
 ```
 aws s3 cp $local_folder_name s3://$s3_bucket_name/$local_folder_name/ --recursive
