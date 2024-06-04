@@ -20,7 +20,22 @@ mysql -h mydbinstance.cxtmwuenuqe2.rds.cn-northwest-1.amazonaws.com.cn -P 3306 -
       DEFAULT CHARACTER SET utf8mb4
       DEFAULT COLLATE utf8mb4_general_ci;
 ```
-## 查看数据库
+## 查看所有的数据库
 ```
 SHOW DATABASES;
+```
+
+## 在usermanage数据库中创建数据表user
+```
+   USE usermanage;
+      CREATE TABLE user (
+       id INT NOT NULL AUTO_工NCREMENT,
+      user VARCHAR(255),
+      pwd VARCHAR(255),
+      email VARCHAR(255),
+      PRIMARY KEY(id)
+      )；
+
+SHOW TABLES;    
+
 ```
