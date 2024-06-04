@@ -52,5 +52,5 @@ s3_bucket_name=lessonbucket
 ```
 ```
 aws s3 cp $local_folder_name s3://$s3_bucket_name/$local_folder_name/ --recursive
-aws s3://$s3_bucket_name ls
+aws s3 ls $s3_bucket_name
 ```
