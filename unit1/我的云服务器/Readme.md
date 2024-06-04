@@ -54,3 +54,12 @@ s3_bucket_name=lessonbucket
 aws s3 cp $local_folder_name s3://$s3_bucket_name/$local_folder_name/ --recursive
 aws s3 ls $s3_bucket_name
 ```
+## 在EC2上创建一个目录后,下载S3上的代码
+```
+region=cn-northwest-1
+local_folder_name=app
+s3_bucket_name=lessonbucket
+```
+```
+sudo aws s3 cp s3://$s3_bucket_name/app . --recursive --region=$region
+```
