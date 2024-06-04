@@ -15,3 +15,8 @@ sudo yum install mysql -y
 ```
 mysql -h mydbinstance.cxtmwuenuqe2.rds.cn-northwest-1.amazonaws.com.cn -P 3306 -u root -p
 ```
+```
+      CREATE DATABASE usermanage
+      DEFAULT CHARACTER SET utf8mb4
+      DEFAULT COLLATE utf8mb4_general_ci;
+```
