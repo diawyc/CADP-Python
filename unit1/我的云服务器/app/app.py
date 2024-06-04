@@ -4,14 +4,15 @@ from flask import Flask, request, session, render_template, jsonify
 import pymysql
 
 app = Flask(__name__)
-app.secret_key = 'XXXXXX'
+app.secret_key = '12345'
 
 def con_db():
-    return pymysql.connect(host='mydbinstance.xxxxxxxxxxxx.rds.cn-north-1.amazonaws.com.cn', port=3306, user='root', passwd='mypassword', db='usermanage', charset='utf8mb4')
+    return pymysql.connect(host='mydbinstance.cxtmwuenuqe2.rds.cn-northwest-1.amazonaws.com.cn', port=3306, user='root', passwd='mypassword', db='usermanage', charset='utf8mb4')
 """
 
 #其中 mydbinstance.xxxxxxxxxxxx.rds.cn-north-1.amazonaws・com・cn为 MySQL的
 #endpoint.此处应替换为之前创建的RDS的endpoint
+
 """
 
 
