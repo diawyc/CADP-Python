@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
     <title>管理首页</title>
@@ -11,7 +11,7 @@
     <div class="layui-main">
         <div class="layui-col-md12">
             <ul class="layui-nav" lay-filter="">
-                <li class="layui-nav-item"><a href="/auser/">用户管理</a></li>
+                <li class="layui-nav-item"><a href="/get_list/">用户管理</a></li>
                 <li class="layui-nav-item" style="float: right;"><a href="/">退出</a></li>
             </ul>
         </div>
@@ -32,18 +32,18 @@
             table.render({
                 elem: '#userList'
                 , height: 800
-                , url: '/get_line/race' + sc // 数据接口
+                , url: '/get_list/?sc=' + sc // 数据接口
                 , page: true // 开启分页
-                , cols: [[ // 表头
+                , cols: [ // 表头
                     {field: 'id', title: 'ID', align: 'center', width: 80, hide: 'false'}
                     , {field: 'user', title: '账号', align: 'center'}
                     , {field: 'email', title: '邮箱', align: 'center'}
                     , {field: 'right', title: '操作', width: 150, align: 'center',
                     toolbar: '#action'}
-                ]]
+                ]
             });
         }
-        getUserList('');//
+        getUserList("");//
         // 查询
         $('#cx_btn').click(function () {
             var cx_user = $('#cx_user').val()
