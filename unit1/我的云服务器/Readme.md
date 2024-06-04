@@ -20,3 +20,7 @@ mysql -h mydbinstance.cxtmwuenuqe2.rds.cn-northwest-1.amazonaws.com.cn -P 3306 -
       DEFAULT CHARACTER SET utf8mb4
       DEFAULT COLLATE utf8mb4_general_ci;
 ```
+## 查看数据表
+```
+SHOW DATABASES;
+```
