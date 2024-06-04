@@ -29,7 +29,7 @@ SHOW DATABASES;
 ```
    USE usermanage;
       CREATE TABLE user (
-       id INT NOT NULL AUTO_工NCREMENT,
+       id INT NOT NULL AUTO_INCREMENT,
       user VARCHAR(255),
       pwd VARCHAR(255),
       email VARCHAR(255),
