@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>用户首页</title>
-    <script src="(( url_for('static', filename='lib/jquery-3.7.1.min.js') ))"></script>
-    <script src="(( url_for('static', filename='lib/layui/layui.all.js') ))"></script>
-    <link rel="stylesheet" href="(( url_for('static', filename='lib/layui/css/layui.css') ))">
+    <script src="{{url_for('static', filename='lib/jquery-3.7.1.min.js')}})"></script>
+    <script src="{{url_for('static', filename='lib/layui/layui.all.js')}}"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='lib/layui/css/layui.css')}}">
     <style>
         .c input {
             width: 200px;
@@ -29,8 +29,7 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+
 <script>
 $(function() {
     $(".put").click(function() {
@@ -50,3 +49,5 @@ $(function() {
     });
 });
 </script>
+</body>
+</html>
