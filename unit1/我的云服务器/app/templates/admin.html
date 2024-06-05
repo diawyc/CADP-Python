@@ -11,7 +11,7 @@
     <div class="layui-main">
         <div class="layui-col-md12">
             <ul class="layui-nav" lay-filter="">
-                <li class="layui-nav-item"><a href="/get_user/">用户管理</a></li>
+                <li class="layui-nav-item"><a href="/get_list/">用户管理</a></li>
                 <li class="layui-nav-item" style="float: right;"><a href="/">退出</a></li>
             </ul>
         </div>
@@ -20,7 +20,7 @@
             <button class="layui-btn cx_btn">查询</button>
         </div>
         <div class="layui-col-md12">
-            <table id="userlist" lay-filter="userList"></table>
+            <table id="userList" lay-filter="userList"></table>
         </div>
     </div>
 <script>
@@ -41,9 +41,18 @@
                     , {fixed: 'right', title: '操作', width: 150, align: 'center',
                     toolbar: '#action'}
                 ]]
+                , data: [] // 初始化为空数据
+                , done: function(res, curr, count) {
+                    // 如果数据为空,则显示一个空行
+                    if (res.data.length === 0) {
+                        var tr = $('<tr><td colspan="4" style="text-align:center;">暂无数据</td></tr>');
+                        res.data = []; // 重置为空数据
+                        res.data.push(tr);
+                    }
+                }
             });
         }
-        getUserList("");
+        getUserList('');
         // 查询
         $('.cx_btn').click(function () {
             var cx_user = $('#cx_user').val()
