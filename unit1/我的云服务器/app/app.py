@@ -98,7 +98,7 @@ def auser():
     # print(sc)
     con = con_db()
     cu = con.cursor(pymysql.cursors.DictCursor)
-    sql = 'select count(*) as ct from user where 1=1'
+    sql = 'select count(*)ct from user where 1=1'
     sql1= 'select * from user where 1=1'
     if sc:
         sql += " and user like '%{}%'".format(sc)

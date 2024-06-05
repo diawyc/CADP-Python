@@ -11,7 +11,7 @@
     <div class="layui-main">
         <div class="layui-col-md12">
             <ul class="layui-nav" lay-filter="">
-                <li class="layui-nav-item"><a href="/auser/">用户管理</a></li>
+                <li class="layui-nav-item"><a href="/get_user/">用户管理</a></li>
                 <li class="layui-nav-item" style="float: right;"><a href="/">退出</a></li>
             </ul>
         </div>
@@ -34,18 +34,18 @@
                 , height: 800
                 , url: '/get_list/?sc=' + sc // 数据接口
                 , page: true // 开启分页
-                , cols: [ // 表头
+                , cols: [ [// 表头
                     {field: 'id', title: 'ID', align: 'center', width: 80, hide: false}
                     , {field: 'user', title: '账号', align: 'center'}
                     , {field: 'email', title: '邮箱', align: 'center'}
                     , {fixed: 'right', title: '操作', width: 150, align: 'center',
                     toolbar: '#action'}
-                ]
+                ]]
             });
         }
-        getUserList("");//
+        getUserList("");
         // 查询
-        $('#cx_btn').click(function () {
+        $('.cx_btn').click(function () {
             var cx_user = $('#cx_user').val()
             getUserList(cx_user)
         });
@@ -77,7 +77,8 @@
                     area: ['auto', 'auto'],
                     title: '修改密码',
                     btn: ['确定', '返回'],
-                    content: '<div class="layui-input-block" style="margin: 0;width: 400px; text-align: center;"><input class="layui-input" style="width: 300px; display: inline-block;" autocomplete="off"></div>',
+                    content: '<div class="" style="height: 80px; width: 400px; text-align: center">\n' + 
+           '<div class="layui-col-md12"><input type="password" placeholder="密码" id="pwd" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>\n' + '</div>\n',
                     yes: function () {
                         // 确认修改
                         var pwd = $("#pwd").val();
