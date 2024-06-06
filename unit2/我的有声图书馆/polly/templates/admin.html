@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN>
+<head>
+    <meta charset="UTF-8">
+    <title>管理首页</title>
+    <script src="{{ url_for('static', filename='lib/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/layui/layui.all.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='lib/layui/css/layui.css') }}">
+</head>
+<body>
+    <div class="layui-main">
+        <div class="layui-col-md12">
+            <ul class="layui-nav" lay-filter="">
+                <li class="layui-nav-item"><a href="/get_list/">用户管理</a></li>
+                <li class="layui-nav-item" style="float: right;"><a href="/">退出</a></li>
+            </ul>
+        </div>
+        <div class="layui-col-md12 img_show" style="margin-top: 10px;">
+            <input type="text" placeholder="输入账号" class="layui-input" id="cx_user" style="display: inline-block; width: 200px;">
+            <button class="layui-btn cx_btn">查询</button>
+        </div>
+        <div class="layui-col-md12">
+            <table id="userList" lay-filter="userList"></table>
+        </div>
+    </div>
+<script>
+    $(function() {
+        var table = layui.table;
+        var layer = layui.layer;
+        // 构建表格
+        function getUserList(sc) {
+            table.render({
+                elem: '#userList'
+                , height: 800
+                , url: '/get_list/?sc=' + sc // 数据接口
+                , page: true // 开启分页
+                , cols: [ [// 表头
+                    {field: 'id', title: 'ID', align: 'center', width: 80, hide: false}
+                    , {field: 'user', title: '账号', align: 'center'}
+                    , {field: 'email', title: '邮箱', align: 'center'}
+                    , {fixed: 'right', title: '操作', width: 150, align: 'center',
+                    toolbar: '#action'}
+                ]]
+                , data: [] // 初始化为空数据
+                , done: function(res, curr, count) {
+                    // 如果数据为空,则显示一个空行
+                    if (res.data.length === 0) {
+                        var tr = $('<tr><td colspan="4" style="text-align:center;">暂无数据</td></tr>');
+                        res.data = []; // 重置为空数据
+                        res.data.push(tr);
+                    }
+                }
+            });
+        }
+        getUserList('');
+        // 查询
+        $('.cx_btn').click(function () {
+            var cx_user = $('#cx_user').val()
+            getUserList(cx_user)
+        });
+        // 监听工具栏
+        table.on('tool(userList)', function (obj) {
+            var data = obj.data; // 获取得当前行的数据
+            var pid = data.id;
+            var layEvent = obj.event;
+            if (layEvent === 'del') { 
+                // 删除
+                $.ajax({
+                    url: '/adel/',
+                    type: 'post',
+                    data: {'pid': pid},
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.code === 0) {
+                            obj.del();
+                            layer.msg(res.msg);
+                        } else{
+                            layer.msg(res.msg)
+                        }
+                    }
+                });
+            } else if (layEvent === 'put') {
+                // 修改
+                var index = layer.open({
+                    type: 1,
+                    area: ['auto', 'auto'],
+                    title: '修改密码',
+                    btn: ['确定', '返回'],
+                    content: '<div class="" style="height: 80px; width: 400px; text-align: center">\n' + 
+           '<div class="layui-col-md12"><input type="password" placeholder="密码" id="pwd" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>\n' + '</div>\n',
+                    yes: function () {
+                        // 确认修改
+                        var pwd = $("#pwd").val();
+                        if (pwd.length > 0) {
+                            $.ajax({
+                                url: '/aput/',
+                                type: 'post',
+                                data: {'pid': pid, 'pwd': pwd},
+                                dataType: 'json',
+                                success: function (res) {
+                                    if (res.code === 0) {
+                                        layer.msg(res.msg);
+                                        layer.close(index);
+                                    } else {
+                                        layer.msg(res.msg);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }         
+        })
+    })
+</script>
+<script type="text/html" id="action">
+    <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="put">修改</a>
+</script>
+</body>
+</html>

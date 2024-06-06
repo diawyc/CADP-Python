@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>用户首页</title>
+    <script src="{{url_for('static', filename='lib/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{url_for('static', filename='lib/layui/layui.all.js')}}"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='lib/layui/css/layui.css')}}">
+    <style>
+        .c input {
+            width: 200px;
+            margin-bottom: 20px;
+            display: inline-block;}
+    </style>
+</head>
+<body>
+    <div class="layui-main c" style="text-align: center">
+        <div class="layui-col-md12" style="margin-bottom: 20px;">
+            <ul class="layui-nav" lay-filter="">
+                <li class="layui-nav-item"><a href="/user_index/">用户信息</a></li>
+                <li class="layui-nav-item" style="float: right;"><a href="/">退出</a></li>
+            </ul>
+        </div>
+        <div class="" style="height: 260px; width: 400px; text-align: center">
+            <div class="layui-col-md12"><input type="text" placeholder="输入邮箱" id="reg_mail" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px"></div>
+            <div class="layui-col-md12"><input type="password" placeholder="密码" id="reg_pwd" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px"></div>
+            <div class="layui-col-md12">
+                <button class="layui-btn put">确定修改</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+$(function() {
+    $(".put").click(function() {
+        var user = $("#user").val();
+        var mail = $("#reg_mail").val();
+        var pwd = $("#reg_pwd").val();
+        $.post('/put/', {'user': name, 'pwd': pwd, 'email': mail}, function(res) {
+            if (res.code === 0) {
+                layer.msg(res.msg);
+                setTimeout(function() {
+                    window.location.href = '/user_index/';
+                }, 1000);
+            } else {
+                layer.msg(res.msg);
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

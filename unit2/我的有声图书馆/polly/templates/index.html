@@ -1,0 +1,66 @@
+<!-- 声明文档类型为 HTML5 -->
+<!DOCTYPE html>
+<!-- 设置语言为英语 -->
+<html lang="en">
+<!-- 头部区域 -->
+<head>
+    <!-- 设置字符编码为 UTF-8 -->
+    <meta charset="utf-8">
+    <!-- 设置页面标题为"主页" -->
+    <title>Polly</title>
+    <!-- 引入 jQuery 库 -->
+    <script src="{{url_for('static', filename='lib/jquery-3.7.1.min.js')}}"></script>
+    <!-- 引入 Layui 框架的 JavaScript 文件 -->
+    <script src="{{url_for('static', filename='lib/layui/layui.all.js')}}"></script>
+    <!-- 引入 Layui 框架的 CSS 文件 -->
+    <link rel="stylesheet" href="{{url_for('static', filename='lib/layui/css/layui.css')}}">
+</head>
+<!-- 主体区域 -->
+<body>
+                                               
+<form name="frm" id="id_frm" action="" method="post">    <!-- 创建表单,提交方式为 POST -->
+<table width="600" border="0" align="center">            <!-- 创建一个居中的 600px 宽的表格 -->
+    <tr><td><h2> Unit2 文字语音</h2></td></tr> <!-- 表格标题行 -->
+<tr><td>                                                 <!-- 新的一行 -->
+    <input type="radio" name="code" id="id_chinese" value="cmn-CN" {% if code=="cmn-CN" %}checked {% endif %} onclick="chinese()">中文 <!-- 中文单选按钮 -->
+    <input type="radio" name="code" id="id_english" value="en-US" {% if code=="en-US" %}checked {% endif %} onclick="english()">英文 <!-- 英文单选按钮 -->
+    &nbsp;&nbsp;&nbsp;&nbsp;输入您的文字                  <!-- 提示文字 -->
+</td></tr>                                               <!-- 结束当前行 -->
+<tr><td>                                                 <!-- 新的一行 -->
+<textarea name="text" id="id_text" style="width:100%;height:100px;overflow:scroll" wrap="off">{{text}}</textarea> <!-- 文本输入区域 -->
+</td></tr>                                               <!-- 结束当前行 -->
+<tr><td align="right"><input type="button" id="id_submit" onclick="trySubmit()" value="提交" ></td></tr> <!-- 提交按钮 -->
+</table>                                                 <!-- 结束表格 -->
+</form>                                                  <!-- 结束表单 -->
+
+<tr id="id_msg"><td>                                     <!-- 消息区域的一行 -->
+    <span>{{msg}}</span>                                 <!-- 显示消息内容 -->
+    {% if fileName!="" %}                                <!-- 如果有文件名 -->
+    <a href="download?fileName={{fileName}}" style="text-decoration:none;">下载</a> <!-- 显示下载链接 -->
+    {% endif %}                                          <!-- 结束 if 语句 -->
+</td></tr>                                               <!-- 结束当前行 -->
+<tr id="id_audio"><td>                                   <!-- 音频播放器的一行 -->
+    {% if fileName!="" %}                                <!-- 如果有文件名 -->
+    <audio src="static/{{fileName}}?rnd={{rnd}}" controls="controls"></audio> <!-- 显示音频播放器 -->
+    {% endif %}                                          <!-- 结束 if 语句 -->
+</td></tr>  
+<script>                                                 
+function trySubmit() {                                   <!-- 定义 trySubmit 函数 -->
+    var text=document.getElementById("id_text").value;   <!-- 获取文本输入框的值 -->
+    if (text=="") {                                      <!-- 如果文本输入框为空 -->
+        alert("请输入文字!"); return;                     <!-- 弹出警告并退出函数 -->
+    }
+    document.getElementById("id_submit").disabled=true; <!-- 禁用提交按钮 -->
+    document.getElementById("id_msg").style.display="none"; <!-- 隐藏消息区域 -->
+    document.getElementById("id_audio").style.display="none"; <!-- 隐藏音频播放器 -->
+    document.getElementById("id_frm").submit();         <!-- 提交表单 -->
+}
+function chinese() {                                     <!-- 定义 chinese 函数 -->
+    document.getElementById("id_text").value="这是一个文字转语音的演示,输入您的文字,提交后会转成语音!"; <!-- 设置文本输入框的中文内容 -->
+}
+function english() {                                     <!-- 定义 english 函数 -->
+    document.getElementById("id_text").value="This is demo converting text into audio. Enter you text,it will be converted into audio after submit." <!-- 设置文本输入框的英文内容 -->
+}
+</script>                                              
+</body>
+</html>

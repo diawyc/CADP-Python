@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>注册</title>
+  <script src="{{url_for('static', filename='lib/jquery-3.7.1.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/layui/layui.all.js')}}"></script>
+  <link rel="stylesheet" href="{{url_for('static', filename='lib/layui/css/layui.css')}}">
+</head>
+<body>
+  <div class="" style="height: 260px; width: 400px; text-align: center; margin: 20% auto;">
+    <div class="layui-col-md12">用户注册</div>
+    <div class="layui-col-md12"><input type="text" placeholder="用户名" id="reg_name" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>
+    <div class="layui-col-md12"><input type="text" placeholder="邮箱" id="reg_mail" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>
+    <div class="layui-col-md12"><input type="password" placeholder="密码" id="reg_pwd" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>
+    <div class="layui-col-md12"><input type="password" placeholder="确认密码" id="reg_pwd2" class="layui-input" style="width: 300px; display: inline-block; margin-bottom: 20px;"></div>
+    <div class="layui-col-md12">
+      <button class="layui-btn" id="reg">注册</button>
+    </div>
+  </div>
+
+  <script>
+    $(function () {
+      $('#reg').click(function () {
+        var name = $('#reg_name').val();
+        var mail = $('#reg_mail').val();
+        var pwd = $('#reg_pwd').val();
+        var pwd2 = $('#reg_pwd2').val();
+        console.log(pwd);
+        var user_rz = /^[0-9a-zA-Z]{6,}$/;
+        var mail_rz = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/;
+        console.log(user_rz.test(name));
+        console.log(mail_rz.test(mail));
+        if (!user_rz.test(name)) {
+          return layer.msg('用户名最少6个字符且只能包含字母和数字, 且不能为空')
+        } else if (pwd.length === 0 || pwd !== pwd2) {
+          return layer.msg('请输入相同的密码')
+        } else if (!mail_rz.test(mail)) {
+          return layer.msg('请输入有效的邮箱')
+        } else {
+          $.post('/reg/', {'user': name, 'pwd': pwd, 'email': mail}, function (res) {
+            if (res.code === 0) {
+              layer.msg(res.msg);
+              setTimeout(function() {
+                window.location.href = '/'
+              }, 2000);
+            } else {
+              layer.msg(res.msg)
+            }
+          })
+        }
+      })
+    })
+  </script>
+</body>
+</html>
