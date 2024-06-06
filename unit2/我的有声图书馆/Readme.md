@@ -62,7 +62,7 @@ local_folder_name=polly
 s3_bucket_name=lessonbucket
 ```
 ```
-sudo aws s3 cp s3://$s3_bucket_name/app . --recursive --region=$region
+sudo aws s3 cp s3://$s3_bucket_name/polly . --recursive --region=$region
 ```
 ## 启动Web程序
 ```
