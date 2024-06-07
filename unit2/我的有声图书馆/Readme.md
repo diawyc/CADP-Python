@@ -45,8 +45,10 @@ INSERT INTO user (id, user, pwd, email)
 VALUES (1, 'admin', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', '123@admin.com');
 select * from user;
 ```
-
-
+## 创建配置文件
+```
+printf "host,user,password\nmydbinstance.cxtmwuenuqe2.rds.cn-northwest-1.amazonaws.com.cn,root,mypassword" > mySql.csv
+```
 
 ## 将本地app目录上传至S3上
 ```
