@@ -8,12 +8,7 @@
     <meta charset="utf-8">
     <!-- 设置页面标题为"主页" -->
     <title>Polly</title>
-    <!-- 引入 jQuery 库 -->
-    <script src="{{url_for('static', filename='lib/jquery-3.7.1.min.js')}}"></script>
-    <!-- 引入 Layui 框架的 JavaScript 文件 -->
-    <script src="{{url_for('static', filename='lib/layui/layui.all.js')}}"></script>
-    <!-- 引入 Layui 框架的 CSS 文件 -->
-    <link rel="stylesheet" href="{{url_for('static', filename='lib/layui/css/layui.css')}}">
+
 </head>
 <!-- 主体区域 -->
 <body>
@@ -30,8 +25,8 @@
 <textarea name="text" id="id_text" style="width:100%;height:100px;overflow:scroll" wrap="off">{{text}}</textarea> <!-- 文本输入区域 -->
 </td></tr>                                               <!-- 结束当前行 -->
 <tr><td align="right"><input type="button" id="id_submit" onclick="trySubmit()" value="提交" ></td></tr> <!-- 提交按钮 -->
-</table>                                                 <!-- 结束表格 -->
-</form>                                                  <!-- 结束表单 -->
+</table>                                                 
+</form>                                                  
 
 <tr id="id_msg"><td>                                     <!-- 消息区域的一行 -->
     <span>{{msg}}</span>                                 <!-- 显示消息内容 -->
@@ -51,8 +46,7 @@ function trySubmit() {                                   <!-- 定义 trySubmit �
         alert("请输入文字!"); return;                     <!-- 弹出警告并退出函数 -->
     }
     document.getElementById("id_submit").disabled=true; <!-- 禁用提交按钮 -->
-    document.getElementById("id_msg").style.display="none"; <!-- 隐藏消息区域 -->
-    document.getElementById("id_audio").style.display="none"; <!-- 隐藏音频播放器 -->
+
     document.getElementById("id_frm").submit();         <!-- 提交表单 -->
 }
 function chinese() {                                     <!-- 定义 chinese 函数 -->

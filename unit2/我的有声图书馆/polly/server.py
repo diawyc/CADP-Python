@@ -14,7 +14,8 @@ def convertToAudio(code,contents):
         else:
             id="Amy"
 
-        client=boto3.client('Polly')
+        region_name = 'cn-northwest-1' 
+        client=boto3.client('polly',region_name=region_name)
         response = client.synthesize_speech(
             LanguageCode=code,
             OutputFormat='mp3',
