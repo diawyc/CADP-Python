@@ -34,15 +34,8 @@ SHOW DATABASES;
 
 ## 在usermanage数据库中创建数据表user
 ```
-   USE usermanage;
-      CREATE TABLE user (
-       id INT NOT NULL AUTO_INCREMENT,
-      user VARCHAR(255),
-      pwd VARCHAR(255),
-      email VARCHAR(255),
-      PRIMARY KEY(id)
-      );
-
+USE usermanage;
+create table books (BID int auto_increment primary key, title varchar(256) unique, author varchar(64), language varchar(16), contents longtext, image varchar(16), audio varchar(16))
 SHOW TABLES;    
 
 ```
