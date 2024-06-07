@@ -23,7 +23,7 @@ def convertToAudio(code,contents):
             TextType='text',
             VoiceId=id)
         data=response["AudioStream"].read()
-        fobj=open("static\\audio.mp3",'wb')
+        fobj=open("static/audio.mp3",'wb')
         fobj.write(data)
         fobj.close()
         res=True
@@ -52,8 +52,8 @@ def download():
     fileName=flask.request.args.get("fileName","")
     if fileName=="":
         return b""
-    if os.path.exists("static\\"+fileName):
-        fobj=open("static\\"+fileName,'rb') #windows和unix的符号不一样
+    if os.path.exists("static/"+fileName):
+        fobj=open("static/"+fileName,'rb') #windows和unix的符号不一样
         data=fobj.read()
         fobj.close()
         response=flask.make_response(data)

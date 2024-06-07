@@ -1,5 +1,5 @@
 # 安装Python开发程序
-p019
+
 ```
 sudo yum install python3 python3-pip
 pip3 install --upgrade pip
@@ -7,6 +7,12 @@ pip3 install --user flask
 pip3 install --user pymysql
 pip3 install --user boto3
 
+```
+# 升级到Python 11
+```
+sudo yum install -y gcc openssl-devel bzip2-devel libffi-devel
+
+sudo wget https://www.python.org/ftp/python/3.11.0/Python-3.11.0.tgz
 ```
 ## 安装mysql
 ```
