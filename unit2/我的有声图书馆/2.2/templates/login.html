@@ -1,0 +1,44 @@
+<!-- 声明文档类型为 HTML5 -->
+<!DOCTYPE html>
+<!-- 设置语言为英语 -->
+<html lang="en">
+<!-- 头部区域 -->
+<head>
+    <!-- 设置字符编码为 UTF-8 -->
+    <meta charset="utf-8">
+    <!-- 设置页面标题为"主页" -->
+    <title>login</title>
+
+</head>
+<!-- 主体区域 -->
+<body>
+                                               
+<style>
+    a {text-decoration:none;color:blue}
+    a:visited {color:blue}
+</style>
+
+<table width="800" height="300" align="center" border="0">
+    <tr><td valign="top">
+        <h1 align="center">管理员登录</h1>
+        <div style="text-align:right">
+            <form name="frm" action="" method="post">
+                <table border="0" align="center">
+                    <tr><td>用户名称</td><td><input type="text" name="user" id="user"
+value="{{user}}"></td></tr>
+                    <tr><td>用户密码</td><td><input type="password" name="pwd"
+id="pwd"></td></tr>
+                    <tr><td colspan="2" align="right"><input type="submit" value="登录
+"></td></tr>
+                    <tr><td colspan="2">{{msg}}</td></tr>
+                    <tr><td colspan="2"><a href="/">返回列表</a></td></tr>
+                </table>
+            </form>
+        </div>
+    </td></tr>
+</table>
+
+
+                                     
+</body>
+</html>

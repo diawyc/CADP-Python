@@ -7,54 +7,76 @@
     <!-- 设置字符编码为 UTF-8 -->
     <meta charset="utf-8">
     <!-- 设置页面标题为"主页" -->
-    <title>Polly</title>
+    <title>index</title>
 
 </head>
 <!-- 主体区域 -->
 <body>
                                                
-<form name="frm" id="id_frm" action="" method="post">    <!-- 创建表单,提交方式为 POST -->
-<table width="600" border="0" align="center">            <!-- 创建一个居中的 600px 宽的表格 -->
-    <tr><td><h2> Unit2 文字语音</h2></td></tr> <!-- 表格标题行 -->
-<tr><td>                                                 <!-- 新的一行 -->
-    <input type="radio" name="code" id="id_chinese" value="cmn-CN" {% if code=="cmn-CN" %}checked {% endif %} onclick="chinese()">中文 <!-- 中文单选按钮 -->
-    <input type="radio" name="code" id="id_english" value="en-US" {% if code=="en-US" %}checked {% endif %} onclick="english()">英文 <!-- 英文单选按钮 -->
-    &nbsp;&nbsp;&nbsp;&nbsp;输入您的文字                  <!-- 提示文字 -->
-</td></tr>                                               <!-- 结束当前行 -->
-<tr><td>                                                 <!-- 新的一行 -->
-<textarea name="text" id="id_text" style="width:100%;height:100px;overflow:scroll" wrap="off">{{text}}</textarea> <!-- 文本输入区域 -->
-</td></tr>                                               <!-- 结束当前行 -->
-<tr><td align="right"><input type="button" id="id_submit" onclick="trySubmit()" value="提交" ></td></tr> <!-- 提交按钮 -->
-</table>                                                 
-</form>                                                  
-
-<tr id="id_msg"><td>                                     <!-- 消息区域的一行 -->
-    <span>{{msg}}</span>                                 <!-- 显示消息内容 -->
-    {% if fileName!="" %}                                <!-- 如果有文件名 -->
-    <a href="download?fileName={{fileName}}" style="text-decoration:none;">下载</a> <!-- 显示下载链接 -->
-    {% endif %}                                          <!-- 结束 if 语句 -->
-</td></tr>                                               <!-- 结束当前行 -->
-<tr id="id_audio"><td>                                   <!-- 音频播放器的一行 -->
-    {% if fileName!="" %}                                <!-- 如果有文件名 -->
-    <audio src="static/{{fileName}}?rnd={{rnd}}" controls="controls"></audio> <!-- 显示音频播放器 -->
-    {% endif %}                                          <!-- 结束 if 语句 -->
-</td></tr>  
-<script>                                                 
-function trySubmit() {                                   <!-- 定义 trySubmit 函数 -->
-    var text=document.getElementById("id_text").value;   <!-- 获取文本输入框的值 -->
-    if (text=="") {                                      <!-- 如果文本输入框为空 -->
-        alert("请输入文字!"); return;                     <!-- 弹出警告并退出函数 -->
+<script>
+    function firstPage(pageIndex,pageCount,key)
+    {
+        if(pageIndex>1) window.location.href="?pageIndex=1&key="+key;
     }
-    document.getElementById("id_submit").disabled=true; <!-- 禁用提交按钮 -->
+    function prevPage(pageIndex,pageCount,key)
+    {
+        if(pageIndex>1) { --pageIndex; window.location.href="?pageIndex="+pageI
+ndex+"&key="+key; }
+    }
+    function nextPage(pageIndex,pageCount,key)
+    {
+        if(pageIndex<pageCount) { ++pageIndex; window.location.href="?pageInde
+x="+pageIndex+"&key="+key; }
+    }
+    function lastPage(pageIndex,pageCount,key)
+    {
+        if(pageIndex<pageCount) { window.location.href="?pageIndex="+pageCount
++"&key="+key; }
+    }
 
-    document.getElementById("id_frm").submit();         <!-- 提交表单 -->
-}
-function chinese() {                                     <!-- 定义 chinese 函数 -->
-    document.getElementById("id_text").value="这是一个文字转语音的演示,输入您的文字,提交后会转成语音!"; <!-- 设置文本输入框的中文内容 -->
-}
-function english() {                                     <!-- 定义 english 函数 -->
-    document.getElementById("id_text").value="This is demo converting text into audio. Enter you text,it will be converted into audio after submit." <!-- 设置文本输入框的英文内容 -->
-}
-</script>                                              
+    function seekList()
+    {
+        var key=document.getElementById("key").value.trim();
+        window.location.href="?key="+key;
+    }
+</script>
+<style>
+    a {text-decoration:none;color:blue}
+    a:visited {color:blue}
+</style>
+<h1 align="center">我的书库</h1>
+<div style="text-align: center;">
+<div style="text-align: center;">
+    <p><a href="/login">管理员</a>&nbsp;&nbsp;<input type="text" name="key"
+id="key" value="{{key}}"><input type="button" value="搜索" onclick="seekList()"></p>
+</div>
+<div style="display: inline-block; width: 1300; text-align: left;">
+{% for book in books %}
+<div style="display: inline-block; width:200px;overflow:hidden;margin-left:
+20px;">
+    <div style="white-space: nowrap;"><h4>{{book.title}}</h4></div>
+    <div><img src="static/{{book.image}}" width="100" height="100"></div>
+    <div>编号:{{book.BID}}</div>
+    <div>作者:{{book.author}}</div>
+    <div>
+        <a href="/?readBook?BID={{book.BID}}&pageIndex={{pageIndex}}&key={{k
+ey}}">阅书网站</a>
+    </div>
+</div>
+{% endfor %}
+</div>
+<div>
+    <p></p>
+    <a href="javascript:firstPage({{pageIndex}},{{pageCount}},'{{key}}')">第一页
+</a>
+    <a href="javascript:prevPage({{pageIndex}},{{pageCount}},'{{key}}')">前一页
+</a>
+    <a href="javascript:nextPage({{pageIndex}},{{pageCount}},'{{key}}')">下一页
+</a>
+    <a href="javascript:lastPage({{pageIndex}},{{pageCount}},'{{key}}')">末一页
+</a>
+    第{{pageIndex}}/{{pageCount}}页
+</div>
+                                     
 </body>
 </html>

@@ -1,0 +1,72 @@
+<!-- 声明文档类型为 HTML5 -->
+<!DOCTYPE html>
+<!-- 设置语言为英语 -->
+<html lang="en">
+<!-- 头部区域 -->
+<head>
+    <!-- 设置字符编码为 UTF-8 -->
+    <meta charset="utf-8">
+    <!-- 设置页面标题为"主页" -->
+    <title>insertBook</title>
+
+</head>
+<!-- 主体区域 -->
+<body>
+                                               
+<script>
+     function fontChanged()
+     {
+         var i=fontList.selectedIndex;
+         var size=fontList.options[i].value;
+     document.getElementById("contents").style.fontSize=size;
+     }
+</script>
+
+<style>
+     a {text-decoration:none;color:blue}
+     a:visited {color:blue}
+</style>
+
+<table border="0" style="width:80%" align="center">
+<tr><td>{{title}}</h1></td></tr>
+</table>
+
+<input type="hidden" name="pageIndex" id="pageIndex" value="{{pageIndex}}">
+<input type="hidden" name="key" id="key" value="{{key}}">
+<input type="hidden" name="BID" id="BID" value="{{BID}}">
+
+<table border="0" style="width:80%;border:1px solid;" align="center">
+     <tr>
+         <td><a href="/pageIndex={{pageIndex}}&key={{key}}">返回列表</a></td>
+         <td>
+             选择字号:<select name="fontList" id="fontList" onchange="fontChanged()">
+                 <option value='18px'>18px</option>
+                 <option value='20px'>20px</option>
+                 <option value='22px'>22px</option>
+                 <option value='24px'>24px</option>
+                 <option value='26px'>26px</option>
+                 <option value='28px'>28px</option>
+             </select>
+         </td>
+     </tr>
+     {% if audio!='' %}
+         <td><a href="/download?BID={{BID}}&audio={{audio}}">下载音频文件</a></p>
+     {% endif %}
+     </td>
+     <td>
+         {% if audio!='' %}
+             <audio src="static/{{audio}}?rnd={{rnd}}" controls="controls"
+style="height:30px"></audio>
+         {% endif %}
+     </td>
+</tr>
+</table>
+<p>&nbsp;</p>
+<table border="0" id="contents" align="center" style="width:80%;border:1px
+dashed;font:18px">
+     <tr><td>{{contents|safe}}</td></tr>
+</table>
+
+                                     
+</body>
+</html>
