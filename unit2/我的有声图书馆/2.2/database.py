@@ -181,7 +181,7 @@ def insertBook(title,author,language,contents,data):
                     except Exception as err:
                         print(err)
                     return res
-
+"""p109"""
                 @staticmethod
                 def selectBook(BID):
                     book=None
@@ -198,4 +198,21 @@ def insertBook(title,author,language,contents,data):
                     return book
                 @staticmethod
                 def listBook(key):
+                    books=[]
+                    books=[]
+                    try:
+                        mySql=BookDatabase.readMySql()
+                        con=pymysql.connect(host=mySql["host"],user=mySql["user"],password=mySql["password"],charset="utf8",db="audiobooks")
+                        cursor=con.cursor(pymysql.cursors.DictCursor)
+                        sql="select BID,title,author,language,image,audio from books order by title"
+                        if key!="":
+                            sql="select BID,title,author,language,image,audio from books where title like '%"+key+"%' order by title"
+                        cursor.execute(sql)
+                        books=cursor.fetchall()
+                        con.close()
+                    except Exception as err:
+                        print(err)
+                    return books
+
+
 
