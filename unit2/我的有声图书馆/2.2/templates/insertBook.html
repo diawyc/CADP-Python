@@ -14,59 +14,80 @@
 <body>
                                                
 <script>
-     function fontChanged()
-     {
-         var i=fontList.selectedIndex;
-         var size=fontList.options[i].value;
-     document.getElementById("contents").style.fontSize=size;
-     }
+        function trySubmit()
+        {
+                var s=document.getElementById("title").value.trim();
+                if(s=="")
+                {
+                        alert("图书名称不能空"); return;
+                }
+                var s=document.getElementById("imgFile").value;
+                if(s!="")
+                {
+                        var p=s.lastIndexOf(".");
+                        var ext="";
+                        if(p>=0) ext=s.substring(p+1);
+                        if(ext!="jpg")
+                        {
+                                alert("选择图书图像必须是JPG图像文件"); return false;
+                        }
+                                }
+        var s=document.getElementById("contents").value.trim();
+        if(s.length>3000)
+        {
+                alert("图书内容不能超过3000字符"); return;
+        }
+        document.getElementById("frm").submit();
+        }
 </script>
 
 <style>
-     a {text-decoration:none;color:blue}
-     a:visited {color:blue}
+        a{text-decoration:none;color:blue}
+        a:visited {color:blue}
 </style>
 
-<table border="0" style="width:80%" align="center">
-<tr><td>{{title}}</h1></td></tr>
-</table>
-
-<input type="hidden" name="pageIndex" id="pageIndex" value="{{pageIndex}}">
-<input type="hidden" name="key" id="key" value="{{key}}">
-<input type="hidden" name="BID" id="BID" value="{{BID}}">
-
-<table border="0" style="width:80%;border:1px solid;" align="center">
-     <tr>
-         <td><a href="/pageIndex={{pageIndex}}&key={{key}}">返回列表</a></td>
-         <td>
-             选择字号:<select name="fontList" id="fontList" onchange="fontChanged()">
-                 <option value='18px'>18px</option>
-                 <option value='20px'>20px</option>
-                 <option value='22px'>22px</option>
-                 <option value='24px'>24px</option>
-                 <option value='26px'>26px</option>
-                 <option value='28px'>28px</option>
-             </select>
-         </td>
-     </tr>
-     {% if audio!='' %}
-         <td><a href="/download?BID={{BID}}&audio={{audio}}">下载音频文件</a></p>
-     {% endif %}
-     </td>
-     <td>
-         {% if audio!='' %}
-             <audio src="static/{{audio}}?rnd={{rnd}}" controls="controls"
-style="height:30px"></audio>
-         {% endif %}
-     </td>
-</tr>
-</table>
-<p>&nbsp;</p>
-<table border="0" id="contents" align="center" style="width:80%;border:1px
-dashed;font:18px">
-     <tr><td>{{contents|safe}}</td></tr>
-</table>
-
-                                     
+<table border="0" align="center">
+<tr><td>
+<h1>增加图书</h1>
+<!-- The list will show with key=title when returns-->
+<div><a href="/selectBook?key={{key}}">返回列表</a></div>
+<p></p>
+<form name="frm" id="frm" action="" method="post" enctype="multipart/form-data">
+        <table border="0" width="600">
+                <tr><td>图书名称 (*)<input type="text" name="title" id="title" value="{{title}}"></td>
+                <td>图书作者<input type="text" name="author" id="author" value="{{author}}"></td>
+                <td>图书语言
+                        <select name="yList" id="yList">
+                                <option value="chinese" {% if language=='chinese' %} selected {% endif %}>中文</option>
+                                <option value="english" {% if language=="english" %} selected {% endif %}>英文</option>
+                        </select>
+                </td>
+        </tr>
+        <tr>
+                <td>图书封面
+                        {% if image!="" %}
+                        <img src="static/{{image}}"rnd={{rnd}} width="100">
+                        {% endif %}
+                <input type="file" name="imgFile" id="imgFile"></td>
+        </tr>
+        <tr>
+                <td colspan="3">图书语音
+                        {% if audio!="" %} 
+                        <audio src="static/{{audio}}"rnd={{rnd}} controls="controls" style="height:30px"/>
+                        {% endif %}
+                                </td>
+        </tr>
+        <tr><td colspan="3">图书内容</td></tr>
+        <tr><td colspan="3" style="width:100%;height:124">
+                <textarea name="contents" id="contents" style="width:100%;height:120">
+        {{contents}}</textarea>
+        </td></tr>
+                <tr><td colspan="3" align="right"><input type="button" value="提交"
+onclick="return trySubmit()"></td></tr>
+                <tr><td colspan="3" align="left">{{msg}}</td></tr>
+        </table>
+</form>
+</td></tr>
+</table>                                 
 </body>
 </html>
