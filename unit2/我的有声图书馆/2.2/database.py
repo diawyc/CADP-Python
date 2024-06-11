@@ -155,3 +155,47 @@ def insertBook(title,author,language,contents,data):
                         con.close()
                         result={"BID":BID,"image":image,"audio":audio}
 """page 108"""
+                except Exception as err:
+                    print(err)
+                return result
+
+                @staticmethod
+                def deleteBook(BID):
+                    res=False
+                    try:
+                        mySql=BookDatabase.readMySql()
+                        con=pymysql.connect(host=mySql["host"],user=mySql["user"],password=mySql["password"],charset="utf8",db="audiobooks")
+                        cursor=con.cursor(pymysql.cursors.DictCursor)
+                        #Removing the associated image and audio
+                        sBID="%06d"%BID
+                        image="static\\"+sBID+".jpg"
+                        if os.path.exists(image):
+                            os.remove(image)
+                        audio="static\\"+sBID+".mp3"
+                        if os.path.exists(audio):
+                            os.remove(audio)
+                        cursor.execute("delete from books where BID="+str(BID))
+                        con.commit()
+                        con.close()
+                        res=True
+                    except Exception as err:
+                        print(err)
+                    return res
+
+                @staticmethod
+                def selectBook(BID):
+                    book=None
+                    try:
+                        mySql=BookDatabase.readMySql()
+                        con=pymysql.connect(host=mySql["host"],user=mySql["user"],password=mySql["password"],charset="utf8",db="audiobooks")
+                        cursor=con.cursor(pymysql.cursors.DictCursor)
+                        sql="select * from books where BID="+str(BID)
+                        cursor.execute(sql)
+                        book=cursor.fetchone()
+                        con.close()
+                    except Exception as err:
+                        print(err)
+                    return book
+                @staticmethod
+                def listBook(key):
+
