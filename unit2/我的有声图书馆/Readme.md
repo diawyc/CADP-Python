@@ -46,5 +46,5 @@ sudo aws s3 cp s3://$s3_bucket_name/$local_folder_name . --recursive --region=$r
 sudo chown -R ssm-user:ssm-user static
 ```
 ```
-python3 /usr/bin/mytest/polly/server.py
+python3 /usr/bin/mytest/$local_folder_name/server.py
 ```
