@@ -1,6 +1,6 @@
 ## 将本地app目录上传至S3上
 ```
-local_folder_name=library
+local_folder_name=AudioBook
 s3_bucket_name=lessonbucket
 ```
 ```
@@ -18,5 +18,5 @@ sudo aws s3 cp s3://$s3_bucket_name/app . --recursive --region=$region
 ```
 ## 启动Web程序
 ```
-python3 /usr/bin/mytest/app/app.py
+python3 /usr/bin/mytest/audiobook/server.py
 ```
