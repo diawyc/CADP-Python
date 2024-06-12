@@ -1,6 +1,6 @@
 ## 将本地app目录上传至S3上
 ```
-local_folder_name=app
+local_folder_name=library
 s3_bucket_name=lessonbucket
 ```
 ```
