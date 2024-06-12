@@ -10,7 +10,7 @@ aws s3 ls $s3_bucket_name
 ## 在EC2上创建一个目录后,下载S3上的代码
 ```
 region=cn-northwest-1
-local_folder_name=app
+local_folder_name=AudioBook
 s3_bucket_name=lessonbucket
 ```
 ```
