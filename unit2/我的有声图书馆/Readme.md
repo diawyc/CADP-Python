@@ -52,7 +52,7 @@ printf "host,user,password\nmydbinstance.cxtmwuenuqe2.rds.cn-northwest-1.amazona
 
 ## 将本地app目录上传至S3上
 ```
-local_folder_name=polly
+local_folder_name=AudioBook
 s3_bucket_name=lessonbucket
 ```
 ```
@@ -62,11 +62,11 @@ aws s3 ls $s3_bucket_name
 ## 在EC2上创建一个目录后,下载S3上的代码
 ```
 region=cn-northwest-1
-local_folder_name=polly
+local_folder_name=AudioBook
 s3_bucket_name=lessonbucket
 ```
 ```
-sudo aws s3 cp s3://$s3_bucket_name/polly . --recursive --region=$region
+sudo aws s3 cp s3://$s3_bucket_name/$local_folder_name . --recursive --region=$region
 ```
 ## 启动Web程序
 ### 给写进文件夹的权限
