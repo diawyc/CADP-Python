@@ -1,41 +1,48 @@
-import flask
+import pymysql
 import boto3
-import time
-import random
-import os
+class AudioClass:
 
-Class AudioClass:
-""""remove readKeys()"""
-                @staticmethod
-                def convertToAudio(BID, language, contents):
-                    audio=""
-                    try:
-                        if language=="chinese":
-                            languageCode="cmn-CN"
-                            voiceId="Zhiyu"
-                        else:
-                            languageCode="en-US"
-                            voiceId="Amy"
-                        #keys=AudioClass.readKeys()
-                        region_name = 'cn-northwest-1' 
-                        client=boto3.client("polly",region_name=region_name)
-                        response = client.synthesize_speech(
-                            LanguageCode=languageCode,
-                            OutputFormat='mp3',
-                            Text=contents,
-                            TextType='text',
-                            VoiceId=voiceId
-                        )
-                        data=response["AudioStream"].read()
-                        audio=("%06d"%BID)+ ".mp3"
-                        fobj=open("static/"+audio, "wb")
-                        fobj.write(data)
-                        fobj.close()
-                    except Exception as err:
-                        print(err)
-                        audio=""
-                    return audio
-                    """ 2.2 代码
+    """
+
+#remove readKeys()
+
+因为使用ec2 instance profile之后boto3会直接自动使用credential,无需自己编写这部分代码,因此将原书中删除
+
+
+
+    """
+    @staticmethod
+    def convertToAudio(BID, language, contents):
+        audio=""
+        try:
+            if language=="chinese":
+                languageCode="cmn-CN"
+                voiceId="Zhiyu"
+            else:
+                languageCode="en-US"
+                voiceId="Amy"
+            region_name = 'cn-northwest-1' #keys=AudioClass.readKeys()
+            client=boto3.client("polly",region_name=region_name)
+
+
+            
+            response = client.synthesize_speech(
+                LanguageCode=languageCode,
+                OutputFormat='mp3',
+                Text=contents,
+                TextType='text',
+                VoiceId=voiceId
+            )
+            data=response["AudioStream"].read()
+            audio=("%06d"%BID)+ ".mp3"
+            fobj=open("static/"+audio, "wb")
+            fobj.write(data)
+            fobj.close()
+        except Exception as err:
+            print(err)
+            audio=""
+        return audio
+    """ 2.2 代码
 
                 def convertToAudio(BID,language,contents):
                     res=False
@@ -98,4 +105,4 @@ Class AudioClass:
                 app.debug=True
                 if __name__ == '__main__':
                     app.run(host='0.0.0.0', port=5000, debug=True)
-                       """
+"""

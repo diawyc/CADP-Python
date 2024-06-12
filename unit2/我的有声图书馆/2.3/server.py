@@ -8,7 +8,7 @@ import random
 import time
 import os
 import urllib.request
-app=flask.Flask("web") # main
+app=flask.Flask(__name__) # change from book
 """
 @app.route("/initialize")
 def initialize():
@@ -194,6 +194,7 @@ def login():
         return str(error)
 app.secret_key = "123"
 app.debug = True
-app.run()         
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)     
   
 
