@@ -20,3 +20,6 @@ sudo aws s3 cp s3://$s3_bucket_name/app . --recursive --region=$region
 ```
 python3 /usr/bin/mytest/audiobook/server.py
 ```
+```
+python3 /usr/bin/mytest/audiobook/test.py
+```
