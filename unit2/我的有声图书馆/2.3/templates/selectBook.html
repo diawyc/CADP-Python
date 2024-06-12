@@ -1,0 +1,84 @@
+<!-- 声明文档类型为 HTML5 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>selectBook</title>
+    <style>
+        a {text-decoration:none;color:blue}
+        a:visited {color:blue}
+    </style>
+</head>
+<body>
+    <h1 align="center">图书管理</h1>
+<div style="text-align: center;">
+    <div>
+        <a href="/">用户退出</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="insertBook?key={{key}}">增加图书</a>
+    </div>
+    <div>
+        <p>搜索<input type="text" name="key" id="key" value="{{key}}"><input type=
+"button" value="搜索" onclick='seekList()'></p>
+    </div>
+    <div style="display: inline-block; width: 1300; text-align: left;">
+        {% for book in books %}
+    <div style="display: inline-block; width:200px;overflow:hidden;margin-left:
+20px;">
+        <div style="white-space: nowrap;"><h4>{{book.title}}</h4></div>
+        <div><img src="static/{{book.image}}" width="100" height="100"></div>
+        <div>编号:{{book.BID}}</div>
+        <div>作者:{{book.author}}</div>
+        <p>
+            <a href="javascript:deleteBook('{{book.BID}}','{{pageIndex}}','{{key}})">
+删除图书</a>
+            <a href="/updateBook?BID={{book.BID}}&pageIndex={{pageIndex}}&key={{k
+ey}}">编辑图书</a>
+        </p>
+    </div>
+    {% endfor %}
+    </div>
+    <div>
+        <p></p>
+        <a href="javascript:firstPage({{pageIndex}},{{pageCount}},'{{key}}')">第一页</a>
+        <a href="javascript:prevPage({{pageIndex}},{{pageCount}},'{{key}}')">前一页</a>
+        <a href="javascript:nextPage({{pageIndex}},{{pageCount}},'{{key}}')">下一页</a>
+        <a href="javascript:lastPage({{pageIndex}},{{pageCount}},'{{key}}')">末一页</a>
+        第 {{pageIndex}}/{{pageCount}}页
+    </div>
+</div>
+    
+
+    <script>
+    function deleteBook(BID,pageIndex,key)
+    {
+        if(confirm("确除确定"+BID+"这本图书?"))
+        {
+            window.location.href="?cmd=delete&BID="+BID+"&pageIndex="+pageIndex+"&key="+key;
+        }
+    }
+    function firstPage(pageIndex,pageCount,key)
+    {
+        if(pageIndex>1) window.location.href="?pageIndex=1&key="+key;
+    }
+    function prevPage(pageIndex,pageCount,key)
+    {
+        if(pageIndex>1) { --pageIndex; window.location.href="?pageIndex="+pageI
+ndex+"&key="+key; }
+    }
+    function nextPage(pageIndex,pageCount,key)
+    {
+        if(pageIndex<pageCount) { ++pageIndex; window.location.href="?pageIndex="+pageIndex+"&key="+key; }
+    }
+    function lastPage(pageIndex,pageCount,key)
+    {
+        if(pageIndex<pageCount) { window.location.href="?pageIndex="+pageCount
++"&key="+key; }
+    }
+    function seekList()
+    {
+        var key=document.getElementById("key").value.trim();
+        window.location.href="?key="+key;
+    }
+</script>
+    </script>
+</body>
+</html>

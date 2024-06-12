@@ -1,0 +1,99 @@
+<!-- 声明文档类型为 HTML5 -->
+<!DOCTYPE html>
+<!-- 设置语言为英语 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>updateBook</title>
+    <style>
+        a {text-decoration:none;color:blue}
+        a:visited {color:blue}
+    </style>
+</head>
+<body>
+    <table border="0" align="center">
+        <tr><td>
+            <h1>编辑图书</h1>
+            <div><a href="/selectBook?pageIndex={{pageIndex}}&key={{key}}">返回列表</a></div>
+            <input type="hidden" name="BID" value="{{BID}}">
+            <input type="hidden" name="pageIndex" value="{{pageIndex}}">
+            <input type="hidden" name="key" value="{{key}}">
+        </td></tr>
+    </table>
+
+    <p></p>
+    <form name="frm" id="frm" action="" method="post" enctype="multipart/form-data">
+        <table border="0" width="800">
+            <tr><td>图书名称 (*)<input type="text" name="title" id="title" value="{{title}}"></td>
+            <td>{{title}}</td>
+            <td>图书作者<input type="text" name="author" id="author" value="{{author}}">
+            </td>
+        </tr>
+        <tr>
+            <td>图书语言
+                <select name="yList" id="yList">
+                    <option value="chinese" {% if language=="chinese" %} selected {%
+                        endif %}>中文</option>
+                    <option value="english" {% if language=="english" %} selected {%
+                        endif %}>英文</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>图书封面
+                {% if image!="" %}
+                    <img src="static/{{image}}?rnd={{rnd}}" width="100">
+                {% endif %}
+            </td>
+            <td colspan="2"><input type="file" name="imgFile" id="imgFile"></td>
+        </tr>
+        <tr>
+            <td colspan="3">图书语音
+                {% if audio!="" %}
+                    <audio src="static/{{audio}}?rnd={{rnd}}" controls="controls"
+                        style="height:30px"/>
+                {% endif %}
+            </td>
+        </tr>
+        <tr><td colspan="3">图书内容</td></tr>
+        <tr><td colspan="3">
+            <textarea name="contents" id="contents" style="width:100%;height:240px;">
+                >{{contents}}</textarea>
+        </td></tr>
+        <tr><td colspan="3" align="right"><input type="button" value="提交"
+            onclick="return trySubmit()"></td></tr>
+        <tr><td colspan="3" align="left">{{msg}}</td></tr>
+        </table>
+    </form>
+    </td></tr>
+    </table>
+
+    <script>
+        function trySubmit()
+        {
+            var s=document.getElementById("title").value.trim();
+            if(s=="")
+            {
+                alert("图书名称不能空"); return;
+            }
+            var s=document.getElementById("imgFile").value;
+            if(s!="")
+            {
+                var p=s.lastIndexOf(".");
+                var ext="";
+                if(p>=0) ext=s.substring(p+1);
+                if(ext!="jpg")
+                {
+                    alert("选择图书图像必须是JPG图像文件"); return false;
+                }
+            }
+            var s=document.getElementById("contents").value.trim();
+            if(s.length>3000)
+            {
+                alert("图书内容不能超过3000字符"); return;
+            }
+            document.getElementById("frm").submit();
+        }
+    </script>
+</body>
+</html>
