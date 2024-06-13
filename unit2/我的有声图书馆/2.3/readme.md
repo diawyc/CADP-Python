@@ -14,7 +14,11 @@ local_folder_name=AudioBook
 s3_bucket_name=lessonbucket
 ```
 ```
+
 sudo aws s3 cp s3://$s3_bucket_name/AudioBook . --recursive --region=$region
+```
+```
+sudo chown -R ssm-user:ssm-user static
 ```
 ## 启动Web程序
 ```
