@@ -28,6 +28,9 @@ python3 server.py
 python3 initialize.py
 ```
 ```
+http://52.82.100.56:5000/insertBook
+```
+```
 pid=
 sudo lsof -i :5000
 
