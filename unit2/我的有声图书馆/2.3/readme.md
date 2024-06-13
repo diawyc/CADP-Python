@@ -23,3 +23,8 @@ python3 server.py
 ```
 python3 initialize.py
 ```
+```
+pid=
+sudo lsof -i :5000
+
+sudo kill -9 $pid```
