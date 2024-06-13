@@ -21,5 +21,5 @@ sudo aws s3 cp s3://$s3_bucket_name/AudioBook . --recursive --region=$region
 python3 server.py
 ```
 ```
-python3 nitialize.py
+python3 initialize.py
 ```
