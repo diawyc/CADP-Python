@@ -18,7 +18,7 @@ def initialize():
     except Exception as err:
         msg=str(err)
     return json.dumps({"msg":msg})
-"""
+
 @app.route("/",methods=["GET","POST"])
 def index():
     flask.session["login"]=""
@@ -43,10 +43,13 @@ def index():
         return flask.render_template("index.html",books=books,pageCount=pageCount,pageIndex=pageIndex,key=key)
     except Exception as error:
         return str(error)+':line45'
+        """
 @app.route("/insertBook",methods=["GET","POST"])
 def insertBook():
+    """
     if flask.session.get("login","")!="OK":
         return flask.redirect("/")
+    """
     try:
         msg=""
         title=""
@@ -76,6 +79,7 @@ def insertBook():
         return flask.render_template("insertBook.html",title=title,author=author,language=language,contents=contents,image=image,audio=audio,key=key,msg=msg)
     except Exception as error:
         return str(error)+':line 78'
+        """
 @app.route("/updateBook",methods=["GET","POST"])
 def updateBook():
     if flask.session.get("login","")!="OK":
@@ -192,9 +196,9 @@ def login():
         return flask.render_template("login.html", user=user, pwd=pwd, msg=msg)
     except Exception as error:
         return str(error)
+        """
 app.secret_key = "123"
 app.debug = True
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=4000, debug=True)     
-  
+    app.run(host='0.0.0.0', port=5000, debug=True)     
 
