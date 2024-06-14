@@ -25,8 +25,7 @@ ndex+"&key="+key; }
     }
     function nextPage(pageIndex,pageCount,key)
     {
-        if(pageIndex<pageCount) { ++pageIndex; window.location.href="?pageInde
-x="+pageIndex+"&key="+key; }
+        if(pageIndex<pageCount) { ++pageIndex; window.location.href="?pageIndex="+pageIndex+"&key="+key; }
     }
     function lastPage(pageIndex,pageCount,key)
     {
@@ -44,7 +43,7 @@ x="+pageIndex+"&key="+key; }
     a {text-decoration:none;color:blue}
     a:visited {color:blue}
 </style>
-<h1 align="center">我的书库</h1>
+<h1 align="center">我的有声图书</h1>
 <div style="text-align: center;">
 <div style="text-align: center;">
     <p><a href="/login">管理员</a>&nbsp;&nbsp;<input type="text" name="key"
@@ -59,24 +58,18 @@ id="key" value="{{key}}"><input type="button" value="搜索" onclick="seekList()
     <div>编号:{{book.BID}}</div>
     <div>作者:{{book.author}}</div>
     <div>
-        <a href="/?readBook?BID={{book.BID}}&pageIndex={{pageIndex}}&key={{k
-ey}}">阅书网站</a>
+        <a href="/readBook?BID={{book.BID}}&pageIndex={{pageIndex}}&key={{key}}">图书阅读</a>
     </div>
 </div>
 {% endfor %}
 </div>
 <div>
     <p></p>
-    <a href="javascript:firstPage({{pageIndex}},{{pageCount}},'{{key}}')">第一页
-</a>
-    <a href="javascript:prevPage({{pageIndex}},{{pageCount}},'{{key}}')">前一页
-</a>
-    <a href="javascript:nextPage({{pageIndex}},{{pageCount}},'{{key}}')">下一页
-</a>
-    <a href="javascript:lastPage({{pageIndex}},{{pageCount}},'{{key}}')">末一页
-</a>
+    <a href="javascript:firstPage({{pageIndex}},{{pageCount}},'{{key}}')">第一页</a>
+    <a href="javascript:prevPage({{pageIndex}},{{pageCount}},'{{key}}')">前一页</a>
+    <a href="javascript:nextPage({{pageIndex}},{{pageCount}},'{{key}}')">下一页</a>
+    <a href="javascript:lastPage({{pageIndex}},{{pageCount}},'{{key}}')">末一页</a>
     第{{pageIndex}}/{{pageCount}}页
-</div>
-                                     
+</div>                           
 </body>
 </html>

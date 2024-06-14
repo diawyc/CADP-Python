@@ -110,9 +110,9 @@ def updateBook():
                 audio=result["audio"]
             else:
                 msg="更新图书失败: 该图书已经存在"
-            return flask.render_template("updateBook.html",BID=BID,pageIndex=pageIndex,key=key,title=title,author=author,language=language,contents=contents,image=image,audio=audio,msg=msg,rnd=random.random())
+        return flask.render_template("updateBook.html",BID=BID,pageIndex=pageIndex,key=key,title=title,author=author,language=language,contents=contents,image=image,audio=audio,msg=msg,rnd=random.random())
     except Exception as error:
-        return str(error)
+        return str(error)+':line 115'
 @app.route("/readBook",methods=["GET","POST"])
 def readBook():
     try:
@@ -156,7 +156,7 @@ def selectBook():
                 books.append(book)
         return flask.render_template("selectBook.html",books=books,pageCount=pageCount,pageIndex=pageIndex,key=key)
     except Exception as error:
-        return str(error)
+        return str(error)+":line 159"
 @app.route("/download",methods=["GET","POST"])
 def download():
     BID=int(flask.request.values.get("BID","0"))
@@ -195,6 +195,6 @@ def login():
 app.secret_key = "123"
 app.debug = True
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=4000, debug=True)     
+    app.run(host='0.0.0.0', port=5000, debug=True)     
   
 

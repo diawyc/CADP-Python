@@ -39,7 +39,7 @@ class AudioClass:
             fobj.write(data)
             fobj.close()
         except Exception as err:
-            print(err)
+            print(err,':Audio line 42')
             audio=""
         return audio
     """ 2.2 代码

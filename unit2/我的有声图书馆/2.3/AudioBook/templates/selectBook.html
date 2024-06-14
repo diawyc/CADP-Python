@@ -28,10 +28,8 @@
         <div>编号:{{book.BID}}</div>
         <div>作者:{{book.author}}</div>
         <p>
-            <a href="javascript:deleteBook('{{book.BID}}','{{pageIndex}}','{{key}})">
-删除图书</a>
-            <a href="/updateBook?BID={{book.BID}}&pageIndex={{pageIndex}}&key={{k
-ey}}">编辑图书</a>
+            <a href="javascript:deleteBook('{{book.BID}}','{{pageIndex}}','{{key}})">删除图书</a>
+            <a href="/updateBook?BID={{book.BID}}&pageIndex={{pageIndex}}&key={{key}}">编辑图书</a>
         </p>
     </div>
     {% endfor %}
@@ -50,7 +48,7 @@ ey}}">编辑图书</a>
     <script>
     function deleteBook(BID,pageIndex,key)
     {
-        if(confirm("确除确定"+BID+"这本图书?"))
+        if(confirm("删除编号"+BID+"这本图书?"))
         {
             window.location.href="?cmd=delete&BID="+BID+"&pageIndex="+pageIndex+"&key="+key;
         }
@@ -61,8 +59,7 @@ ey}}">编辑图书</a>
     }
     function prevPage(pageIndex,pageCount,key)
     {
-        if(pageIndex>1) { --pageIndex; window.location.href="?pageIndex="+pageI
-ndex+"&key="+key; }
+        if(pageIndex>1) { --pageIndex; window.location.href="?pageIndex="+pageIndex+"&key="+key; }
     }
     function nextPage(pageIndex,pageCount,key)
     {
@@ -70,15 +67,14 @@ ndex+"&key="+key; }
     }
     function lastPage(pageIndex,pageCount,key)
     {
-        if(pageIndex<pageCount) { window.location.href="?pageIndex="+pageCount
-+"&key="+key; }
+        if(pageIndex<pageCount) { window.location.href="?pageIndex="+pageCount+"&key="+key; }
     }
+    
     function seekList()
     {
         var key=document.getElementById("key").value.trim();
         window.location.href="?key="+key;
     }
 </script>
-    </script>
 </body>
 </html>

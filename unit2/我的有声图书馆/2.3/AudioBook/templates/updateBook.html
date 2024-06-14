@@ -18,9 +18,6 @@
             <input type="hidden" name="BID" value="{{BID}}">
             <input type="hidden" name="pageIndex" value="{{pageIndex}}">
             <input type="hidden" name="key" value="{{key}}">
-        </td></tr>
-    </table>
-
     <p></p>
     <form name="frm" id="frm" action="" method="post" enctype="multipart/form-data">
         <table border="0" width="800">
@@ -28,14 +25,10 @@
             <td>{{title}}</td>
             <td>图书作者<input type="text" name="author" id="author" value="{{author}}">
             </td>
-        </tr>
-        <tr>
             <td>图书语言
                 <select name="yList" id="yList">
-                    <option value="chinese" {% if language=="chinese" %} selected {%
-                        endif %}>中文</option>
-                    <option value="english" {% if language=="english" %} selected {%
-                        endif %}>英文</option>
+                    <option value="chinese" {% if language=="chinese" %} selected {% endif %}>中文</option>
+                    <option value="english" {% if language=="english" %} selected {% endif %}>英文</option>
                 </select>
             </td>
         </tr>
@@ -50,18 +43,15 @@
         <tr>
             <td colspan="3">图书语音
                 {% if audio!="" %}
-                    <audio src="static/{{audio}}?rnd={{rnd}}" controls="controls"
-                        style="height:30px"/>
+                    <audio src="static/{{audio}}?rnd={{rnd}}" controls="controls" style="height:30px"/>
                 {% endif %}
             </td>
         </tr>
         <tr><td colspan="3">图书内容</td></tr>
         <tr><td colspan="3">
-            <textarea name="contents" id="contents" style="width:100%;height:240px;">
-                >{{contents}}</textarea>
+            <textarea name="contents" id="contents" style="width:100%;height:240px;">{{contents}}</textarea>
         </td></tr>
-        <tr><td colspan="3" align="right"><input type="button" value="提交"
-            onclick="return trySubmit()"></td></tr>
+        <tr><td colspan="3" align="right"><input type="button" value="提交" onclick="return trySubmit()"></td></tr>
         <tr><td colspan="3" align="left">{{msg}}</td></tr>
         </table>
     </form>

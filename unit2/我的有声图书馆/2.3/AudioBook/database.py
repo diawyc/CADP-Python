@@ -14,7 +14,7 @@ class BookDatabase:
                 mySql["user"] = row[1]
                 mySql["password"] = row[2]
         except Exception as err:
-            print(err)
+            print(err,':BookDatabase line17')
         return mySql
     @staticmethod
     def initialize():
@@ -60,7 +60,7 @@ class BookDatabase:
             for f in fs:
                 os.remove("static/" + f)
         except Exception as err:
-            print(err)
+            print(err,':BookDatabase line63')
         return res
     @staticmethod 
     def login(user,pwd):
@@ -76,7 +76,7 @@ class BookDatabase:
                 res=True
             con.close()
         except Exception as err:
-            print(err)
+            print(err,':BookDatabase line79')
         return res
     @staticmethod
     def insertBook(title,author,language,contents,data):
@@ -98,7 +98,7 @@ class BookDatabase:
                 fobj.write(data)
                 fobj.close()
                 image=sBID+".jpg"
-            audio="" """page 107"""
+            audio="" #page 107
             if contents!="":
                 audio=AudioClass.convertToAudio(BID,language,contents)
             if audio!="" or image!="":
@@ -107,7 +107,7 @@ class BookDatabase:
                 con.close()
                 result={"BID":BID,"image":image,"audio":audio}
         except Exception as err:
-             print(err)
+             print(err,':BookDatabase line 110')
         return result
     @staticmethod
     def updateBook(BID,title,author,language,contents,data):
@@ -119,7 +119,7 @@ class BookDatabase:
             sBID="%06d"%BID
             image=""
             if len(data)>0:
-                fobj=open("static\\"+sBID+".jpg","wb")
+                fobj=open("static/"+sBID+".jpg","wb")
                 fobj.write(data)
                 fobj.close()
                 image=sBID+".jpg"
@@ -127,8 +127,8 @@ class BookDatabase:
             if contents!="":
                 audio=AudioClass.convertToAudio(BID,language,contents)
             else:
-                if os.path.exists("static\\"+sBID+".mp3"):
-                    os.remove("static\\"+sBID+".mp3")
+                if os.path.exists("static/"+sBID+".mp3"):
+                    os.remove("static/"+sBID+".mp3")
             if image:
                 sql="update books set title=%s,author=%s,language=%s,contents=%s,image=%s,audio=%s where BID="+str(BID)
                 cursor.execute(sql,[title,author,language,contents,image,audio])
@@ -140,7 +140,7 @@ class BookDatabase:
                 con.close()
                 result={"BID":BID,"image":image,"audio":audio} 
         except Exception as err:#page 108"""
-            print(err)
+            print(err,':BookDatabase line143')
         return result
     @staticmethod
     def deleteBook(BID):
@@ -151,10 +151,10 @@ class BookDatabase:
             cursor=con.cursor(pymysql.cursors.DictCursor)
             #Removing the associated image and audio
             sBID="%06d"%BID
-            image="static\\"+sBID+".jpg"
+            image="static/"+sBID+".jpg"
             if os.path.exists(image):
                 os.remove(image)
-            audio="static\\"+sBID+".mp3"
+            audio="static/"+sBID+".mp3"
             if os.path.exists(audio):
                 os.remove(audio)
             cursor.execute("delete from books where BID="+str(BID))
@@ -162,7 +162,7 @@ class BookDatabase:
             con.close()
             res=True
         except Exception as err:
-            print(err)
+            print(err,':BookDatabase line 165')
         return res
     @staticmethod
     def selectBook(BID):
@@ -176,7 +176,7 @@ class BookDatabase:
             book=cursor.fetchone()
             con.close()
         except Exception as err:
-            print(err)
+            print(err,':BookDatabase line179')
         return book
     @staticmethod
     def listBook(key):
@@ -192,7 +192,7 @@ class BookDatabase:
             books=cursor.fetchall()
             con.close()
         except Exception as err:
-            print(err)
+            print(err,':BookDatabase line195')
         return books
 
 
