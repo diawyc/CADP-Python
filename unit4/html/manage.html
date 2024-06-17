@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Welcome admin</title>
+</head>
+<body>
+    <button onclick="query()">查询现有用户</button>
+    <button onclick="del()">删除现有用户</button>
+    <button onclick="update()">更新现有用户</button>
+    <button onclick="export_user()">导出现有用户</button>
+    <p id="data"></p>
+
+<script>
+function query(){
+    var xhttp = new XMLHttpRequest();
+    let s = new Set();
+    var data = "";
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            var obj = JSON.parse(this.responseText);
+            if (obj.statuscode == 200){
+                for (i in obj.body){
+                    for (j in Object.keys(obj.body[i])){
+                        s.add(Object.keys(obj.body[i])[j]);
+                    }
+                }
+                for (i of s){
+                    data += String(i)+ "&emsp;|";
+                }
+                data += "</br>";
+                for (j in obj.body){
+                    for (i of s){
+                        if (i in obj.body[j]){
+                            data += String(obj.body[j][i])+ "&emsp;|";
+                        } else{
+                            data += " &emsp;|";
+                        }
+                    }
+                    data += "</br>";
+                }
+                document.getElementById("data").innerHTML = data;
+            } else{
+                document.getElementById("demo").innerHTML = obj.body;
+            }
+        }
+    };
+    xhttp.open("GET", "xxxxx"/*这里需要改为 /queryuser 的调用API*/, true);
+    xhttp.send();
+}
+
+function del(){
+    userid = prompt("请输入您要删除的用户id");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            var obj = JSON.parse(this.responseText);
+            if (obj.statuscode == 200){
+                alert("Delete item successfully!");
+            } else{
+                document.cookie = obj.body;
+                document.getElementById("data").innerHTML = obj.body;
+            }
+        }
+    };
+    myobj = {id: Number(userid)};
+    xhttp.open("POST", "xxxxx"/*这里需要改为 /deleteuser 的调用API*/, true);
+    xhttp.send(JSON.stringify(myobj));
+}
+
+function update(){
+    userid = prompt("请输入您要更新的用户id");
+    update_key = prompt("请输入您要更新的字段");
+    update_value = prompt("请输入您要更新的字段值");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            var obj = JSON.parse(this.responseText);
+            if (obj.statusCode == 200){
+                alert("Update item successfully!");
+            } else{
+                document.cookie = obj.body;
+                document.getElementById("data").innerHTML = obj.body;
+            }
+        }
+    };
+    myobj = {id: Number(userid), key_update: update_key, value: update_value};
+    xhttp.open("POST", "xxxxx"/*这里需要改为 /updateuser 的调用API*/, true);
+    xhttp.send(JSON.stringify(myobj));
+}
+
+function fakeclick(obj){
+    var ev = document.createEvent("MouseEvents");
+    ev.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    obj.dispatchEvent(ev);
+}
+
+function expo(name, data){
+    var uriObject = window.URL || window.webkitURL || window;
+    var export_blob = new Blob([data]);
+    var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+    save_link.href = uriObject.createObjectURL(export_blob);
+    save_link.download = name;
+    fakeclick(save_link);
+}
+
+function export_user(){
+    var xhttp = new XMLHttpRequest();
+    let s = new Set();
+    var data = "";
+    xhttp.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            var obj = JSON.parse(this.responseText);
+            if (obj.statusCode == 200){
+                for (i in obj.body){
+                    for (j in Object.keys(obj.body[i])){
+                        s.add(Object.keys(obj.body[i])[j]);
+                    }
+                }
+                data += "\n";
+                for (i of s){
+                    data += String(i)+",";
+                }
+                data = data.substr(0,data.length-1);
+                data += "\n";
+                for (j in obj.body){
+                    for (i of s){
+                        if (i in obj.body[j]){
+                            data += String(obj.body[j][i])+",";
+                        } else{
+                            data += ",";
+                        }
+                    }
+                    data = data.substr(0,data.length-1);
+                    data += "\n";
+                }
+                expo("user.csv", data);
+            } else{
+                document.getElementById("demo").innerHTML = obj.body;
+                document.cookie = obj.body;
+            }
+        }
+    };
+    xhttp.open("POST", "xxxxx"/*这里需要改为 /queryuser 的调用API*/, true);
+    xhttp.send();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>login</title>
+<style>
+a {
+    width: 300px;
+    height: 30px;
+}
+
+#b {
+    width: 400px;
+    text-align: right;
+}
+</style>
+</head>
+</body> <!-- 书中没有-->
+<div id="b">
+    <form id="frm1" action="/test" method="get">
+    ID: <input type="text" class="a" name="ID"><br>
+用户名: <input type="text" class="a" name="user_name"><br>
+密码: <input type="text" class="a" name="password"><br>
+<input type="button" value="提交" onclick="login()">
+</form>
+</div>
+
+<p id="demo"></p>
+
+<script>
+function login() {
+    var xhttp = new XMLHttpRequest();
+    var x = document.getElementById("frm1");
+    if (x.elements[0].value == "admin" && x.elements[1].value == "admin") {
+        window.location.href = '/manage.html';
+    }
+    
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var obj = JSON.parse(this.responseText);
+            if (obj.body == "Login successfully!") {
+                alert("Login successfully!")
+                window.location.href = "/cashbook.html" + "?ID=" + obj.id;
+            } else {
+                document.getElementById("demo").innerHTML = obj.body;
+                document.cookie = obj.body;
+            }
+        }
+    };
+
+    myObj = {Name: x.elements[1].value, Password: x.elements[2].value, id:
+Number(x.elements[0].value)};
+    xhttp.open("POST", "xxxxxx"(这里暂时修改为/login的测试API), true);
+    xhttp.send(JSON.stringify(myObj));
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.a {
+    width: 300px;
+    height: 30px;
+}
+
+#b {
+    width: 420px;
+    text-align: right;
+}
+</style>
+</head>
+<body>
+<p>请输入注册信息</p>
+<div id="b">
+<form id="frm1" action="/test" method="get">
+用户名: <input type="text" class="a" name="user_name"><br>
+性别: <input type="text" class="a" name="sex"><br>
+密码: <input type="text" class="a" name="password"><br>
+其他信息: <input type="text" class="a" name="others"><br>
+<p>其他信息的继承使用","分开,继续对用","分开</p>
+<input type="button" value="提交" onclick="signin()">
+</form>
+</div>
+<p id="demo"></p>
+<script>
+function signin() {
+    var xhttp = new XMLHttpRequest();
+    var x = document.getElementById("frm1");
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var obj = JSON.parse(this.responseText);
+            if(obj.body == "Sign in successfully!") {
+                alert("Sign in successfully! Your ID is "+ String(obj.id))
+                window.location.href = "/cashbook.html" + "?ID=" + obj.id;
+            }
+            else{
+                document.getElementById("demo").innerHTML = obj.body;
+                document.cookie = obj.body;
+            }
+        }
+    };
+
+    myObj = (Name: x.elements[0].value, Sex: x.elements[1].value, Password: x.elements[2].value, Others: x.elements[3].value);
+    xhttp.open("POST", "xxxxxx"(这里要修改为/signin的调用 API), true);
+    xhttp.send(JSON.stringify(myObj));
+}
+</script>
+</body>
+</html>
