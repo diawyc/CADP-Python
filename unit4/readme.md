@@ -29,7 +29,8 @@ s3_bucket_name='unit4-web'
 name=MyAPI
 api=$(aws apigateway create-rest-api --name $name --description "unit4 api gateawy for lambda" --endpoint-configuration '{"types":["REGIONAL"]}' --region $region --query 'id' --output text)
 echo $api
-
+resource=$(aws apigateway get-resources --rest-api-id $api --quer 'items[0].id' --output text)
+echo $resource
 ```
 
 
@@ -110,5 +111,5 @@ lambdaarn=$(aws lambda create-function \
 echo $lambdaarn
 ```
 ```
-aws apigateway create-resource --rest-api-id $api --parent-id {} --path-part $name --region $region
+aws apigateway create-resource --rest-api-id $api --parent-id $resource --path-part $name --region $region
 ```
