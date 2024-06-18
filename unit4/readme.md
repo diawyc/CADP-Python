@@ -1,6 +1,13 @@
 ## 配置S3
 ```
-aws s3
+region=cn-northwest-1
+bucketname='unit4-web'
+```
+```
+aws s3api create-bucket \
+    --bucket $bucketname \
+    --region $region \
+    --create-bucket-configuration LocationConstraint=$region
 ```
 ## 创建Lambda function
 ### 创建lambda使用的Role
