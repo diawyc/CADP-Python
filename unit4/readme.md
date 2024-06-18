@@ -46,6 +46,12 @@ aws iam attach-role-policy \
     --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 ```
 
+Output
+```
+arn:aws-cn:iam::693658368441:role/DynamoDBReadOnlyAccess_Role
+arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role
+```
+
 ## lambda function
 ```
 name='login'
