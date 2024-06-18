@@ -27,11 +27,9 @@ s3_bucket_name='unit4-web'
 
 ## 创建Lambda function
 ### 创建lambda使用的两个Role
-参数指定
+
 ```
 rolename='DynamoDBReadOnlyAccess_Role'
-rolearn=$(aws iam create-role --role-name $rolename --assume-role-policy-document file://$trustfile --query 'Role.Arn' --output text)
-
 rolearn1=$(aws iam create-role --role-name $rolename --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}' --query 'Role.Arn' --output text)
 echo $rolearn1
 aws iam attach-role-policy \
