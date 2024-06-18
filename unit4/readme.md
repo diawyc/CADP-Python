@@ -28,13 +28,23 @@ s3_bucket_name='unit4-web'
 ## 创建Lambda function
 ### 创建lambda使用的两个Role
 参数指定
-
-policy='arn:aws-cn:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
-
 ```
+rolename='DynamoDBReadOnlyAccess_Role'
+
 aws iam create-role --role-name $rolename --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}'
+aws iam attach-role-policy \
+    --role-name $rolename \
+    --policy-arn arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess \
+    --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+rolename='DynamoDBFullAccess_Role'
 
+aws iam create-role --role-name $rolename --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}'
+aws iam attach-role-policy \
+    --role-name $rolename \
+    --policy-arn arn:aws-cn:iam::aws:policy/AmazonDynamoDBFullAccess \
+    --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 ```
+
 ## lambda function
 ```
 name='login'
