@@ -28,6 +28,9 @@ s3_bucket_name='unit4-web'
 ## 创建Lambda function
 ### 创建lambda使用的两个Role
 参数指定
+
+policy='arn:aws-cn:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
+
 ```
 aws iam create-role --role-name $rolename --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}'
 
