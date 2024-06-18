@@ -1,4 +1,4 @@
-## 配置S3
+## 配置存放HTML网站文件的S3
 ```
 region=cn-northwest-1
 s3_bucket_name='unit4-web'
