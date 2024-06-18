@@ -58,7 +58,21 @@ name='login'
 filename='login.zip'
 rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBReadOnlyAccess_Role'
 ```
-
+```
+name='QueryCashBook'
+filename='QueryCashBook.zip'
+rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBReadOnlyAccess_Role'
+```
+```
+name='QueryUser'
+filename='QueryUser.zip'
+rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBReadOnlyAccess_Role'
+```
+```
+name='InsertUser'
+filename='InsertUser.zip'
+rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
+```
 
 ```
 runtime='python3.11'
