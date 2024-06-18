@@ -112,9 +112,9 @@ echo $lambdaarn
 ```
 ```
 resource-id=$(aws apigateway create-resource --rest-api-id $api --parent-id $resource --path-part $name --region $region --quer 'id' --output text)
-
+echo $resource-id
+```
+```
 aws apigateway put-integration --rest-api-id $api --resource-id=$resource-id --http-method POST --type AWS_PROXY --integration-http-method POST --uri ??/invocations --region $region
-
-# Repeat for the other 6 resources and Lambda functions
 
 ```
