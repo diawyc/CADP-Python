@@ -27,7 +27,8 @@ s3_bucket_name='unit4-web'
 ## create API gateway
 ```
 name=MyAPI
-aws apigateway create-rest-api --name $name --description "unit4 api gateawy for lambda" --endpoint-configuration '{"types":["REGIONAL"]}' --region cn-northwest-1
+api=$(aws apigateway create-rest-api --name $name --description "unit4 api gateawy for lambda" --endpoint-configuration '{"types":["REGIONAL"]}' --region $region --query 'id' --output text)
+echo $api
 ```
 
 ## 创建Lambda function
