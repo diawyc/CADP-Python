@@ -29,7 +29,10 @@ s3_bucket_name='unit4-web'
 name=MyAPI
 api=$(aws apigateway create-rest-api --name $name --description "unit4 api gateawy for lambda" --endpoint-configuration '{"types":["REGIONAL"]}' --region $region --query 'id' --output text)
 echo $api
+
 ```
+
+
 
 ## 创建Lambda function
 ### 创建lambda使用的两个Role
@@ -105,4 +108,7 @@ lambdaarn=$(aws lambda create-function \
     --handler index.lambda_handler \
     --role $rolearn --region=$region --no-cli-pager --query 'FunctionArn' --output text)
 echo $lambdaarn
+```
+```
+aws apigateway create-resource --rest-api-id $api --parent-id {} --path-part $name --region $region
 ```
