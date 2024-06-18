@@ -55,13 +55,14 @@ arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role
 ## lambda function
 ```
 name='login'
+filename='login.zip'
 rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBReadOnlyAccess_Role'
 ```
 
 
 ```
 runtime='python3.11'
-filename='login.zip'
+
 region='cn-northwest-1'
 lambdaarn=$(aws lambda create-function \
     --function-name $name \
