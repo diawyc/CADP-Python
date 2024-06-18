@@ -1,13 +1,23 @@
 ## 配置S3
 ```
 region=cn-northwest-1
-bucketname='unit4-web'
+s3_bucket_name='unit4-web'
 ```
 ```
 aws s3api create-bucket \
-    --bucket $bucketname \
+    --bucket $s3_bucket_name \
     --region $region \
     --create-bucket-configuration LocationConstraint=$region
+```
+
+
+```
+local_folder_name='html'
+s3_bucket_name='unit4-web'
+```
+```
+aws s3 cp $local_folder_name s3://$s3_bucket_name/$local_folder_name/ --recursive
+aws s3 ls $s3_bucket_name
 ```
 ## 创建Lambda function
 ### 创建lambda使用的Role
