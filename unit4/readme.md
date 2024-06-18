@@ -24,6 +24,11 @@ aws s3 ls $s3_bucket_name
 region=cn-northwest-1
 s3_bucket_name='unit4-web'
 ```
+## create API gateway
+```
+name=MyAPI
+aws apigateway create-rest-api --name $name --description "unit4 api gateawy for lambda" --endpoint-configuration '{"types":["REGIONAL"]}' --region cn-northwest-1
+```
 
 ## 创建Lambda function
 ### 创建lambda使用的两个Role
