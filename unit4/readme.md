@@ -73,10 +73,24 @@ name='InsertUser'
 filename='InsertUser.zip'
 rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
 ```
+```
+name='DeleteUser'
+filename='DeleteUser.zip'
+rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
+```
+```
+name='UpdateUser'
+filename='UpdateUser.zip'
+rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
+```
+```
+name='InsertCashBook'
+filename='InsertCashBook.zip'
+rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
+```
 
 ```
 runtime='python3.11'
-
 region='cn-northwest-1'
 lambdaarn=$(aws lambda create-function \
     --function-name $name \
