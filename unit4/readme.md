@@ -115,6 +115,7 @@ resourceid=$(aws apigateway create-resource --rest-api-id $api --parent-id $reso
 echo $resourceid
 uri='arn:aws-cn:apigateway:cn-northwest-1:lambda:path/2015-03-31/functions/'$lambdaarn'/invocations'
 ```
+以下不正确,需要手动在console里关联
 ```
 aws apigateway put-integration --rest-api-id $api --resource-id=$resourceid --http-method POST --type AWS_PROXY --integration-http-method POST --uri $uri --region $region
 
