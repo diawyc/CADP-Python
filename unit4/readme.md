@@ -121,5 +121,5 @@ aws apigateway put-integration --rest-api-id $api --resource-id=$resourceid --ht
 
 ```
 ```
-aws apigateway put-integration --rest-api-id r3fbegrnfk --resource-id='p3doin' --http-method POST --type AWS --integration-http-method POST --uri $uri --region cn-northwest-1
+aws apigateway put-integration --rest-api-id r3fbegrnfk --resource-id='p3doin' --http-method GET --type AWS --integration-http-method POST --uri $uri --region cn-northwest-1
 ```
