@@ -117,6 +117,7 @@ uri='arn:aws-cn:apigateway:cn-northwest-1:lambda:path/2015-03-31/functions/'$lam
 ```
 以下不正确,需要手动在console里关联
 ```
-aws apigateway put-integration --rest-api-id $api --resource-id=$resourceid --http-method POST --type AWS_PROXY --integration-http-method POST --uri $uri --region $region
+aws apigateway put-integration --rest-api-id $api --resource-id=$resourceid --http-method POST --type AWS --integration-http-method POST --uri $uri --region $region
+aws apigateway put-integration --rest-api-id r3fbegrnfk --resource-id=r3fbegrnfk --http-method POST --type AWS --integration-http-method POST --uri $uri --region cn-northwest-1
 
 ```
