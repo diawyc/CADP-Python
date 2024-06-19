@@ -115,17 +115,10 @@ resourceid=$(aws apigateway create-resource --rest-api-id $api --parent-id $reso
 echo $resourceid
 uri='arn:aws-cn:apigateway:cn-northwest-1:lambda:path/2015-03-31/functions/'$lambdaarn'/invocations'
 ```
-以下不正确,需要手动在console里关联
+创建POST method并关联到lambda
 ```
+aws apigateway put-method --rest-api-id $api --resource-id=$resourceid --http-method POST --authorization-type NONE --region cn-northwest-1
+
 aws apigateway put-integration --rest-api-id $api --resource-id=$resourceid --http-method POST --type AWS --integration-http-method POST --uri $uri --region $region
 
-```
-```
-aws apigateway put-integration --rest-api-id r3fbegrnfk --resource-id='p3doin' --http-method GET --type AWS --integration-http-method POST --uri $uri --region cn-northwest-1
-
-
-
-```
-```
-aws apigateway put-integration --rest-api-id r3fbegrnfk --resource-id=wcymub --http-method POST --type AWS --uri $uri --region cn-northwest-1
 ```
