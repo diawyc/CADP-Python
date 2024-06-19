@@ -125,6 +125,11 @@ aws apigateway put-integration --rest-api-id $api --resource-id=$resourceid --ht
 enable CORS
 ```
 aws apigateway put-method --rest-api-id $api --resource-id=$resourceid --http-method OPTIONS --authorization-type NONE --region $region
-aws apigateway put-integration-response --rest-api-id $api --resource-id =$resourceid --http-method OPTIONS --status-code 200 --response-parameters '{"method.response.header.Access-Control-Allow-Headers":"'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'","method.response.header.Access-Control-Allow-Methods":"'OPTIONS,GET,PUT,POST,DELETE'","method.response.header.Access-Control-Allow-Origin":"'*'"}' $region
+```
+```
+aws apigateway put-integration-response --rest-api-id $api --resource-id =$resourceid --http-method OPTIONS  \
+--status-code 200  \
+--response-parameters '{"method.response.header.Access-Control-Allow-Headers":"'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'","method.response.header.Access-Control-Allow-Methods":"'OPTIONS,GET,PUT,POST,DELETE'","method.response.header.Access-Control-Allow-Origin":"'*'"}'  \
+region=$region
 
 ```
