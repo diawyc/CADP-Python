@@ -116,6 +116,6 @@ echo $resourceid
 uri='arn:aws:apigateway:cn-northwest-1:lambda:path/2015-03-31/functions/'$lambdaarn'/invocations'
 ```
 ```
-aws apigateway put-integration --rest-api-id $api --resource-id=$resource-id --http-method POST --type AWS_PROXY --integration-http-method POST --uri $uri --region $region
+aws apigateway put-integration --rest-api-id $api --resource-id=$resourceid --http-method POST --type AWS_PROXY --integration-http-method POST --uri $uri --region $region
 
 ```
