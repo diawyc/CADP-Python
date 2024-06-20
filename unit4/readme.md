@@ -9,7 +9,21 @@ aws s3api create-bucket \
     --region $region \
     --create-bucket-configuration LocationConstraint=$region
 ```
+### cloudfront
+```
+s3url='unit4-web.s3.cn-northwest-1.amazonaws.com.cn'
+```
 
+```
+aws cloudfront create-distribution \
+    --origin-domain-name $s3url \
+    --default-root-object index.html \
+    --priced-class PriceClass_200 \
+    --enabled \
+    --default-cache-behavior-forwarded-values '{"QueryString": false}' \
+    --viewer-protocol-policy allow-all \
+    --origin-protocol-policy http-only
+```
 
 ```
 local_folder_name='html'
@@ -19,6 +33,8 @@ s3_bucket_name='unit4-web'
 aws s3 cp $local_folder_name s3://$s3_bucket_name/ --recursive
 aws s3 ls $s3_bucket_name
 ```
+
+
 ## 创建DynamoDB
 ```
 region=cn-northwest-1
