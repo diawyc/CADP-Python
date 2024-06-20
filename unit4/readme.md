@@ -58,7 +58,7 @@ aws dynamodb create-table \
 name=MyAPI
 api=$(aws apigateway create-rest-api --name $name --description "unit4 api gateawy for lambda" --endpoint-configuration '{"types":["REGIONAL"]}' --region $region --query 'id' --output text)
 echo $api
-resource=$(aws apigateway get-resources --rest-api-id $api --quer 'items[0].id' --output text)
+resource=$(aws apigateway get-resources --rest-api-id $api --quer 'items[0].id' --output text --region $region)
 echo $resource
 ```
 
