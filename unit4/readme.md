@@ -87,6 +87,8 @@ aws iam attach-role-policy --region=$region\
 
 Output
 ```
+arn:aws:iam::373328685180:role/DynamoDBReadOnlyAccess_Role
+arn:aws:iam::373328685180:role/DynamoDBFullAccess_Role
 
 ```
 
@@ -94,7 +96,7 @@ Output
 ```
 name='login'
 filename='login.py.zip'
-rolearn=
+rolearn='arn:aws:iam::373328685180:role/DynamoDBReadOnlyAccess_Role'
 ```
 ```
 name='QueryCashBook'
@@ -111,7 +113,7 @@ filename='QueryUser.py.zip'
 ```
 name='InsertUser'
 filename='InsertUser.py.zip'
-rolearn=''
+rolearn='arn:aws:iam::373328685180:role/DynamoDBFullAccess_Role'
 ```
 ```
 name='DeleteUser'
