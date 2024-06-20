@@ -1,7 +1,7 @@
 ## 配置存放HTML网站文件的S3
 ```
-region=cn-northwest-1
-s3_bucket_name='unit4-web'
+region=eu-west-3
+s3_bucket_name='paris4accessanalyzer'
 ```
 ```
 aws s3api create-bucket \
@@ -13,7 +13,7 @@ aws s3api create-bucket \
 
 ```
 local_folder_name='html'
-s3_bucket_name='unit4-web'
+s3_bucket_name='paris4accessanalyzer'
 ```
 ```
 aws s3 cp $local_folder_name s3://$s3_bucket_name/ --recursive
@@ -23,7 +23,7 @@ aws s3 ls $s3_bucket_name
 
 ## 创建DynamoDB
 ```
-region=cn-northwest-1
+region=eu-west-3
 name='User'
 ```
 ```
@@ -38,7 +38,7 @@ aws dynamodb create-table \
     --billing-mode PAY_PER_REQUEST
 ```
 ```
-region=cn-northwest-1
+region=eu-west-3
 name='CashBook'
 ```
 ```
@@ -130,7 +130,7 @@ rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
 
 ```
 runtime='python3.11'
-region='cn-northwest-1'
+region='eu-west-3'
 lambdaarn=$(aws lambda create-function \
     --function-name $name \
     --runtime $runtime \
@@ -142,11 +142,11 @@ echo $lambdaarn
 ```
 resourceid=$(aws apigateway create-resource --rest-api-id $api --parent-id $resource --path-part $name --region $region --quer 'id' --output text)
 echo $resourceid
-uri='arn:aws-cn:apigateway:cn-northwest-1:lambda:path/2015-03-31/functions/'$lambdaarn'/invocations'
+uri='arn:aws:apigateway:eu-west-3:lambda:path/2015-03-31/functions/'$lambdaarn'/invocations'
 ```
 创建POST method并关联到lambda
 ```
-aws apigateway put-method --rest-api-id $api --resource-id=$resourceid --http-method POST --authorization-type NONE --region cn-northwest-1
+aws apigateway put-method --rest-api-id $api --resource-id=$resourceid --http-method POST --authorization-type NONE --region $region
 
 aws apigateway put-integration --rest-api-id $api --resource-id=$resourceid --http-method POST --type AWS --integration-http-method POST --uri $uri --region $region
 
