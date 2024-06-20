@@ -16,8 +16,8 @@ local_folder_name='html'
 s3_bucket_name='paris4accessanalyzer'
 ```
 ```
-aws s3 cp $local_folder_name s3://$s3_bucket_name/ --recursive
-aws s3 ls $s3_bucket_name
+aws s3 cp $local_folder_name s3://$s3_bucket_name/ --recursive --region=$region
+aws s3 ls $s3_bucket_name --region=$region
 ```
 
 
