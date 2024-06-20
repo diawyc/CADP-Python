@@ -87,45 +87,46 @@ aws iam attach-role-policy \
 
 Output
 ```
-arn:aws-cn:iam::693658368441:role/DynamoDBReadOnlyAccess_Role
-arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role
+
 ```
 
 ## lambda function
 ```
 name='login'
 filename='login.py.zip'
-rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBReadOnlyAccess_Role'
+rolearn=
 ```
 ```
 name='QueryCashBook'
 filename='QueryCashBook.py.zip'
-rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBReadOnlyAccess_Role'
+
 ```
 ```
 name='QueryUser'
 filename='QueryUser.py.zip'
-rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBReadOnlyAccess_Role'
+
 ```
+以下为fullaccess
+
 ```
 name='InsertUser'
 filename='InsertUser.py.zip'
-rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
+rolearn=''
 ```
 ```
 name='DeleteUser'
 filename='DeleteUser.py.zip'
-rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
+
 ```
 ```
 name='UpdateUser'
 filename='UpdateUser.py.zip'
-rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
+
 ```
 ```
 name='InsertCashBook'
 filename='InsertCashBook.py.zip'
-rolearn='arn:aws-cn:iam::693658368441:role/DynamoDBFullAccess_Role'
+
 ```
 
 ```
