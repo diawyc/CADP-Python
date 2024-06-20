@@ -9,21 +9,7 @@ aws s3api create-bucket \
     --region $region \
     --create-bucket-configuration LocationConstraint=$region
 ```
-### cloudfront
-```
-s3url='unit4-web.s3.cn-northwest-1.amazonaws.com.cn'
-```
 
-```
-aws cloudfront create-distribution \
-    --origin-domain-name $s3url \
-    --default-root-object index.html \
-    --priced-class PriceClass_200 \
-    --enabled \
-    --default-cache-behavior-forwarded-values '{"QueryString": false}' \
-    --viewer-protocol-policy allow-all \
-    --origin-protocol-policy http-only
-```
 
 ```
 local_folder_name='html'
