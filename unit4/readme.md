@@ -146,7 +146,10 @@ echo $lambdaarn
 resourceid=$(aws apigateway create-resource --rest-api-id $api --parent-id $resource --path-part $name --region $region --quer 'id' --output text)
 echo $resourceid
 uri='arn:aws:apigateway:eu-west-3:lambda:path/2015-03-31/functions/'$lambdaarn'/invocations'
+
 ```
+
+以下部分先用手工吧,因为需要加上lambda resource based permission还没找到method arn
 创建POST method并关联到lambda
 ```
 aws apigateway put-method --rest-api-id $api --resource-id=$resourceid --http-method POST --authorization-type NONE --region $region
