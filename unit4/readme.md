@@ -35,7 +35,7 @@ aws dynamodb create-table \
     --key-schema \
         AttributeName=ID,KeyType=HASH \
         AttributeName=Name,KeyType=RANGE \
-    --billing-mode PAY_PER_REQUEST
+    --billing-mode PAY_PER_REQUEST --region=$region
 ```
 ```
 region=eu-west-3
@@ -50,7 +50,7 @@ aws dynamodb create-table \
     --key-schema \
         AttributeName=ID,KeyType=HASH \
         AttributeName=User_ID,KeyType=RANGE \
-    --billing-mode PAY_PER_REQUEST
+    --billing-mode PAY_PER_REQUEST --region=$region
 ```
 
 ## create API gateway
