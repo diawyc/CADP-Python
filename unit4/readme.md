@@ -69,17 +69,17 @@ echo $resource
 
 ```
 rolename='DynamoDBReadOnlyAccess_Role'
-rolearn1=$(aws iam create-role --role-name $rolename --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}' --query 'Role.Arn' --output text)
+rolearn1=$(aws iam create-role --role-name $rolename --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}' --region=$region --query 'Role.Arn' --output text)
 echo $rolearn1
-aws iam attach-role-policy \
+aws iam attach-role-policy --region=$region\
     --role-name $rolename \
     --policy-arn arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess \
     --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 
 rolename='DynamoDBFullAccess_Role'
-rolearn2=$(aws iam create-role --role-name $rolename --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}' --query 'Role.Arn' --output text)
+rolearn2=$(aws iam create-role --role-name $rolename --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]}' --region=$region --query 'Role.Arn' --output text)
 echo $rolearn2
-aws iam attach-role-policy \
+aws iam attach-role-policy --region=$region\
     --role-name $rolename \
     --policy-arn arn:aws-cn:iam::aws:policy/AmazonDynamoDBFullAccess \
     --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
