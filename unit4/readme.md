@@ -81,7 +81,7 @@ rolearn2=$(aws iam create-role --role-name $rolename --assume-role-policy-docume
 echo $rolearn2
 aws iam attach-role-policy --region=$region\
     --role-name $rolename \
-    --policy-arn arn:aws-cn:iam::aws:policy/AmazonDynamoDBFullAccess \
+    --policy-arn arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess \
     --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 ```
 
