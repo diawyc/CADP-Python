@@ -22,8 +22,35 @@ aws s3 ls $s3_bucket_name
 ## 创建DynamoDB
 ```
 region=cn-northwest-1
-s3_bucket_name='unit4-web'
+name='User'
 ```
+```
+aws dynamodb create-table \
+    --table-name $name \
+    --attribute-definitions \
+        AttributeName=ID,AttributeType=N \
+        AttributeName=Name,AttributeType=S \
+    --key-schema \
+        AttributeName=ID,KeyType=HASH \
+        AttributeName=Name,KeyType=RANGE \
+    --billing-mode PAY_PER_REQUEST
+```
+```
+region=cn-northwest-1
+name='CashBook'
+```
+```
+aws dynamodb create-table \
+    --table-name $name \
+    --attribute-definitions \
+        AttributeName=ID,AttributeType=N \
+        AttributeName=User_ID,AttributeType=S \
+    --key-schema \
+        AttributeName=ID,KeyType=HASH \
+        AttributeName=User_ID,KeyType=RANGE \
+    --billing-mode PAY_PER_REQUEST
+```
+
 ## create API gateway
 ```
 name=MyAPI
