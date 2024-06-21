@@ -147,7 +147,7 @@ lambdaarn=$(aws lambda create-function \
     --function-name $name \
     --runtime $runtime \
     --zip-file fileb://$filename \
-    --handler index.lambda_handler \
+    --handler $name'.lambda_handler' \
     --role $rolearn --region=$region --no-cli-pager --query 'FunctionArn' --output text)
 echo $lambdaarn
 ```
