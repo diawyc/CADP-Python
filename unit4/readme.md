@@ -61,7 +61,16 @@ echo $api
 resource=$(aws apigateway get-resources --rest-api-id $api --quer 'items[0].id' --output text --region $region)
 echo $resource
 ```
+### create Role to cloudwatch
 
+```
+rolename='api_cloudwatchlog'
+rolearn3=$(aws iam create-role --role-name $rolename --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"apigateway.amazonaws.com"},"Action":"sts:AssumeRole"}]}' --region=$region --query 'Role.Arn' --output text)
+echo $rolearn3
+aws iam attach-role-policy --region=$region\
+    --role-name $rolename \
+    --policy-arn arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs
+```
 
 
 ## 创建Lambda function
